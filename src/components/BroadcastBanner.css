@@ -1,0 +1,77 @@
+.broadcast-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 20px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-amber-dim) 0%,
+    color-mix(in srgb, var(--accent-amber) 8%, #fff) 100%
+  );
+  border-bottom: 1px solid color-mix(in srgb, var(--accent-amber) 25%, transparent);
+  color: color-mix(in srgb, var(--accent-amber) 85%, #451a03);
+  flex-shrink: 0;
+}
+
+.broadcast-banner--embedded {
+  border-bottom: none;
+  border-top: 1px solid color-mix(in srgb, var(--accent-amber) 18%, var(--border-subtle));
+  padding: 9px 20px 10px;
+}
+
+.broadcast-banner-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--accent-amber) 12%, #fff);
+  color: var(--accent-amber);
+  border: 1px solid color-mix(in srgb, var(--accent-amber) 22%, transparent);
+}
+
+.broadcast-banner-text {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.broadcast-banner-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.broadcast-banner-nav button {
+  border: 1px solid color-mix(in srgb, var(--accent-amber) 35%, transparent);
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  color: inherit;
+  transition: background 0.15s ease;
+}
+
+.broadcast-banner-nav button:hover {
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .broadcast-banner,
+  .broadcast-banner--embedded {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .broadcast-banner-text {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,65 @@
+/* Glossy sweep on hover — use on overview module / link cards (needs overflow: hidden). */
+.rnb-overview-card-shine {
+  --shine-accent: var(
+    --card-accent,
+    var(--link-card-accent, var(--accent-primary))
+  );
+}
+
+.rnb-overview-card-shine::after {
+  content: '';
+  position: absolute;
+  top: -40%;
+  bottom: -40%;
+  left: 0;
+  width: 42%;
+  max-width: 220px;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 18%,
+    rgba(255, 255, 255, 0.55) 42%,
+    rgba(255, 255, 255, 0.92) 50%,
+    rgba(255, 255, 255, 0.45) 58%,
+    color-mix(in srgb, var(--shine-accent) 18%, rgba(255, 255, 255, 0.35)) 68%,
+    transparent 88%
+  );
+  transform: translateX(-170%) skewX(-22deg);
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  filter: blur(0.3px);
+  mix-blend-mode: soft-light;
+}
+
+.rnb-overview-card-shine:hover::after {
+  animation: rnb-overview-shine-sweep 0.9s cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
+}
+
+.rnb-overview-card-shine:not(:hover)::after {
+  animation: none;
+  transform: translateX(-170%) skewX(-22deg);
+  opacity: 0;
+}
+
+@keyframes rnb-overview-shine-sweep {
+  0% {
+    transform: translateX(-170%) skewX(-22deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(340%) skewX(-22deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rnb-overview-card-shine::after,
+  .rnb-overview-card-shine:hover::after {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}

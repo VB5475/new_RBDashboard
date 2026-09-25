@@ -1,0 +1,82 @@
+.rnb-work-map-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.rnb-work-map-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.rnb-work-map-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 96vw);
+  height: min(85vh, 780px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: var(--radius-md, 12px);
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.22);
+}
+
+.rnb-work-map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 11%, #fff) 0%,
+    #fff 100%
+  );
+}
+
+.rnb-work-map-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.rnb-work-map-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.rnb-work-map-body {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.rnb-work-map-leaflet {
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.rnb-work-map-empty {
+  margin: auto;
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
+  font-weight: 500;
+}

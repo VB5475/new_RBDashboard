@@ -1,0 +1,150 @@
+
+<h2 class="sr-only">Wing-wise daily water storage totals for Gujarat from Apr 9 to Apr 18, grouped bars at 40% opacity no border, with 1.5px lines for NG, SAU, SG.</h2>
+
+<div style="display:flex;flex-wrap:wrap;gap:14px;margin:1rem 0 0.5rem;font-size:12px;color:var(--color-text-secondary);">
+  <span style="display:flex;align-items:center;gap:5px;">
+    <span style="width:12px;height:12px;border-radius:2px;background:rgba(55,138,221,0.4);display:inline-block;"></span>NG — North Gujarat
+  </span>
+  <span style="display:flex;align-items:center;gap:5px;">
+    <span style="width:12px;height:12px;border-radius:2px;background:rgba(29,158,117,0.4);display:inline-block;"></span>SAU — Saurashtra
+  </span>
+  <span style="display:flex;align-items:center;gap:5px;">
+    <span style="width:12px;height:12px;border-radius:2px;background:rgba(216,90,48,0.4);display:inline-block;"></span>SG — South Gujarat
+  </span>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1rem;">
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 1rem;">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;">NG avg / day</div>
+    <div style="font-size:20px;font-weight:500;color:#185FA5;">5.02 MCM</div>
+  </div>
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 1rem;">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;">SAU avg / day</div>
+    <div style="font-size:20px;font-weight:500;color:#0F6E56;">5.18 MCM</div>
+  </div>
+  <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem 1rem;">
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;">SG avg / day</div>
+    <div style="font-size:20px;font-weight:500;color:#993C1D;">5.73 MCM</div>
+  </div>
+</div>
+
+<div style="position:relative;width:100%;height:380px;">
+  <canvas id="wingDaily" role="img" aria-label="Grouped bar and thin line chart showing daily wing-wise water storage totals for NG, SAU, SG from Apr 9 to Apr 18.">NG peaks at 5.93 on Apr 17, SAU peaks at 6.1 on Apr 17, SG peaks at 6.67 on Apr 9.</canvas>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const labels = ['09-Apr','10-Apr','11-Apr','12-Apr','13-Apr','14-Apr','15-Apr','16-Apr','17-Apr','18-Apr'];
+const ng  = [3.922, 5.876, 5.541, 5.782, 4.961, 4.221, 4.996, 5.185, 5.934, 3.765];
+const sau = [5.445, 5.714, 5.029, 6.033, 4.665, 3.441, 5.885, 4.132, 6.105, 5.357];
+const sg  = [6.668, 5.074, 6.413, 5.138, 5.919, 6.578, 5.471, 5.517, 4.889, 5.674];
+
+new Chart(document.getElementById('wingDaily'), {
+  data: {
+    labels,
+    datasets: [
+      {
+        type: 'bar',
+        label: 'NG',
+        data: ng,
+        backgroundColor: 'rgba(55,138,221,0.40)',
+        borderWidth: 0,
+        borderRadius: 3,
+        order: 2
+      },
+      {
+        type: 'bar',
+        label: 'SAU',
+        data: sau,
+        backgroundColor: 'rgba(29,158,117,0.40)',
+        borderWidth: 0,
+        borderRadius: 3,
+        order: 2
+      },
+      {
+        type: 'bar',
+        label: 'SG',
+        data: sg,
+        backgroundColor: 'rgba(216,90,48,0.40)',
+        borderWidth: 0,
+        borderRadius: 3,
+        order: 2
+      },
+      {
+        type: 'line',
+        label: 'NG trend',
+        data: ng,
+        borderColor: '#0C447C',
+        backgroundColor: 'transparent',
+        borderWidth: 1.5,
+        borderDash: [],
+        pointRadius: 3,
+        pointBackgroundColor: '#0C447C',
+        pointBorderColor: '#0C447C',
+        pointBorderWidth: 1,
+        tension: 0.35,
+        order: 1
+      },
+      {
+        type: 'line',
+        label: 'SAU trend',
+        data: sau,
+        borderColor: '#085041',
+        backgroundColor: 'transparent',
+        borderWidth: 1.5,
+        borderDash: [6,3],
+        pointRadius: 3,
+        pointBackgroundColor: '#085041',
+        pointBorderColor: '#085041',
+        pointBorderWidth: 1,
+        tension: 0.35,
+        order: 1
+      },
+      {
+        type: 'line',
+        label: 'SG trend',
+        data: sg,
+        borderColor: '#712B13',
+        backgroundColor: 'transparent',
+        borderWidth: 1.5,
+        borderDash: [3,3],
+        pointRadius: 3,
+        pointBackgroundColor: '#712B13',
+        pointBorderColor: '#712B13',
+        pointBorderWidth: 1,
+        tension: 0.35,
+        order: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => {
+            const name = ctx.dataset.label.replace(' trend','');
+            return ` ${name}: ${ctx.parsed.y.toFixed(3)} MCM`;
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { font: { size: 11 }, color: '#888780', autoSkip: false },
+        grid: { display: false }
+      },
+      y: {
+        beginAtZero: true,
+        title: { display: true, text: 'Daily total storage (MCM)', color: '#888780', font: { size: 11 } },
+        ticks: { font: { size: 11 }, color: '#888780', callback: v => v.toFixed(1) },
+        grid: { color: 'rgba(136,135,128,0.15)' },
+        max: 8
+      }
+    }
+  }
+});
+</script>

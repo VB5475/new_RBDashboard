@@ -1,0 +1,121 @@
+.rnb-chart-click-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.rnb-chart-click-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 9%, #fff) 0%,
+    rgba(255, 255, 255, 0.96) 100%
+  );
+}
+
+.rnb-chart-click-heading h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.rnb-chart-click-heading p {
+  margin: 6px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.rnb-chart-click-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+}
+
+.rnb-chart-click-back:hover {
+  filter: brightness(1.05);
+}
+
+.rnb-chart-click-body {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  padding: 16px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.rnb-chart-click-body .data-grid-wrapper--dashboard {
+  flex: 1;
+  min-height: 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.rnb-chart-click-body .data-grid-wrapper--modal-chrome {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.rnb-chart-click-body .data-grid-wrapper--modal-chrome .data-grid-scroll {
+  overflow-x: auto;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  max-height: none;
+}
+
+.rnb-chart-click-body .data-grid-table {
+  min-width: max-content;
+}
+
+.rnb-map-cell-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  background: #1976d2;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rnb-map-cell-btn:hover {
+  background: #1565c0;
+}
+
+.data-grid-table td:has(.rnb-map-cell-btn) {
+  text-align: center;
+}

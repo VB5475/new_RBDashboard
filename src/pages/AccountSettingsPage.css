@@ -1,0 +1,271 @@
+.rnb-account-page {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.rnb-account-card {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.rnb-account-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 10%, #fff) 0%,
+    rgba(255, 255, 255, 0.96) 100%
+  );
+}
+
+.rnb-account-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--accent-primary-dim);
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.rnb-account-card-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.rnb-account-card-header p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.rnb-account-card-body {
+  padding: 22px;
+}
+
+.rnb-account-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 900px) {
+  .rnb-account-grid--split {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+    align-items: start;
+  }
+}
+
+.rnb-account-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.rnb-account-field span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.rnb-account-field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  font-size: 14px;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rnb-account-field input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-primary-dim);
+}
+
+.rnb-account-field input:disabled {
+  background: var(--bg-muted, #f1f5f9);
+  color: var(--text-secondary);
+}
+
+.rnb-account-password-wrap {
+  position: relative;
+}
+
+.rnb-account-password-wrap input {
+  padding-right: 42px;
+}
+
+.rnb-account-password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: inline-flex;
+  padding: 4px;
+}
+
+.rnb-account-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.rnb-account-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  background: #fff;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+.rnb-account-btn--primary {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #fff;
+}
+
+.rnb-account-btn--danger {
+  background: #fff;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+.rnb-account-btn--success {
+  background: #059669;
+  border-color: #059669;
+  color: #fff;
+}
+
+.rnb-account-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.rnb-account-policy {
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  background: color-mix(in srgb, var(--accent-primary) 4%, #fff);
+}
+
+.rnb-account-policy h2 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-primary-dim);
+}
+
+.rnb-account-policy ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rnb-account-policy li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.35;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.rnb-account-policy li.is-ok {
+  background: rgba(5, 150, 105, 0.1);
+  color: #047857;
+  font-weight: 600;
+}
+
+.rnb-account-policy li.is-bad {
+  background: rgba(239, 68, 68, 0.08);
+  color: #b91c1c;
+}
+
+.rnb-account-policy li.is-neutral {
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.rnb-account-policy-dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.rnb-account-policy-hint {
+  margin: 0 0 12px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.rnb-account-match-hint {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.rnb-account-match-hint.is-ok {
+  background: rgba(5, 150, 105, 0.1);
+  color: #047857;
+}
+
+.rnb-account-match-hint.is-bad {
+  background: rgba(239, 68, 68, 0.08);
+  color: #b91c1c;
+}
+
+.rnb-account-card {
+  box-shadow:
+    0 20px 40px color-mix(in srgb, var(--accent-primary) 12%, transparent),
+    0 0 0 1px rgba(255, 255, 255, 0.65) inset;
+}
+
+.rnb-account-loading {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--text-muted);
+}

@@ -1,0 +1,28 @@
+.account-placeholder {
+  max-width: 520px;
+  margin: 24px auto;
+  padding: 28px 32px;
+}
+
+.account-placeholder h1 {
+  margin: 0 0 12px;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.account-placeholder p {
+  margin: 0 0 20px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.account-placeholder-back {
+  font-weight: 600;
+  color: var(--accent-primary);
+  text-decoration: none;
+}
+
+.account-placeholder-back:hover {
+  text-decoration: underline;
+}

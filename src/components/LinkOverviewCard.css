@@ -1,0 +1,171 @@
+@import './OverviewCardShine.css';
+
+.link-overview-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px 12px 14px;
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--link-card-accent, #22c55e) 8%, #fff) 0%,
+    rgba(255, 255, 255, 0.92) 55%
+  );
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  border-left: none;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    background 0.28s ease;
+}
+
+.link-overview-card--clickable {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.link-overview-card--clickable:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(
+    in srgb,
+    var(--link-card-accent, var(--group-accent, #22c55e)) 45%,
+    var(--border-light)
+  );
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--link-card-accent, #22c55e) 10%, #fff) 0%,
+    rgba(255, 255, 255, 0.99) 50%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 0 0 1px color-mix(
+      in srgb,
+      var(--link-card-accent, #22c55e) 14%,
+      transparent
+    ),
+    0 14px 32px color-mix(
+      in srgb,
+      var(--link-card-accent, #22c55e) 24%,
+      transparent
+    ),
+    0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+.link-overview-card--clickable:active {
+  transform: translateY(-1px);
+  transition-duration: 0.12s;
+}
+
+.link-overview-card--clickable:focus-visible {
+  outline: 2px solid var(--link-card-accent, var(--accent-primary));
+  outline-offset: 3px;
+}
+
+.link-overview-card.glass-card {
+  border-radius: var(--radius-md);
+}
+
+.link-overview-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--link-card-accent, var(--group-accent, #22c55e));
+  opacity: 0.85;
+  z-index: 2;
+  transition:
+    width 0.25s ease,
+    opacity 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.link-overview-card--clickable:hover::before {
+  width: 5px;
+  opacity: 1;
+  box-shadow: 0 0 14px color-mix(
+    in srgb,
+    var(--link-card-accent, #22c55e) 55%,
+    transparent
+  );
+}
+
+.link-overview-card-icon-badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-left: 2px;
+  border-radius: 10px;
+  color: var(--link-card-accent, var(--group-accent, #22c55e));
+  background: color-mix(
+    in srgb,
+    var(--link-card-accent, #22c55e) 14%,
+    #fff
+  );
+  border: 1px solid color-mix(
+    in srgb,
+    var(--link-card-accent, #22c55e) 22%,
+    transparent
+  );
+  position: relative;
+  z-index: 1;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+}
+
+.link-overview-card--clickable:hover .link-overview-card-icon-badge {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px color-mix(
+    in srgb,
+    var(--link-card-accent, #22c55e) 20%,
+    transparent
+  );
+}
+
+.link-overview-card-title {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  padding-left: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: color 0.25s ease;
+}
+
+.link-overview-card--clickable:hover .link-overview-card-title {
+  color: color-mix(in srgb, var(--link-card-accent, #059669) 72%, var(--text-primary));
+}
+
+.link-overview-card-external-icon {
+  flex-shrink: 0;
+  color: var(--link-card-accent, var(--group-accent, #22c55e));
+  opacity: 0.85;
+  position: relative;
+  z-index: 1;
+  transition:
+    opacity 0.25s ease,
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-overview-card--clickable:hover .link-overview-card-external-icon {
+  opacity: 1;
+  transform: translate(3px, -3px);
+}

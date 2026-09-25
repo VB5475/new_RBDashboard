@@ -1,0 +1,61 @@
+.rnb-home-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Chart-click drilldown: fill main column; scroll inside grid only */
+.rnb-home-page--chart-click {
+  flex: 1;
+  min-height: 0;
+  gap: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.rnb-home-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rnb-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.rnb-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.rnb-home-message {
+  padding: 32px;
+  text-align: center;
+  color: var(--text-muted);
+  background: var(--glass-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.rnb-home-error {
+  color: var(--accent-red);
+}
+
+.rnb-retry-btn {
+  display: block;
+  margin: 16px auto 0;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent-primary);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}

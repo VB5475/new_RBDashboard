@@ -1,0 +1,116 @@
+.rnb-account-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100dvh - 120px);
+  margin: -16px -20px -20px;
+  padding: 24px 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: linear-gradient(
+    168deg,
+    var(--bg-primary, #f8fafc) 0%,
+    color-mix(in srgb, var(--accent-primary, #0284c7) 9%, var(--bg-secondary, #f1f5f9)) 55%,
+    color-mix(in srgb, var(--accent-primary, #0284c7) 5%, #fff) 100%
+  );
+}
+
+@media (max-width: 768px) {
+  .rnb-account-shell {
+    margin: -12px -14px -16px;
+    padding: 16px 14px 22px;
+  }
+}
+
+.rnb-account-shell-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rnb-account-shell-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(56px);
+  opacity: 0.55;
+}
+
+.rnb-account-shell-orb--1 {
+  width: min(480px, 90vw);
+  height: min(480px, 90vw);
+  left: 8%;
+  top: 10%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-primary) 48%, #38bdf8) 0%,
+    transparent 68%
+  );
+  animation: rnb-account-orb-a 9s ease-in-out infinite;
+}
+
+.rnb-account-shell-orb--2 {
+  width: min(360px, 75vw);
+  height: min(360px, 75vw);
+  right: 5%;
+  top: 35%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-secondary, #0ea5e9) 42%, #7dd3fc) 0%,
+    transparent 70%
+  );
+  animation: rnb-account-orb-b 11s ease-in-out infinite;
+}
+
+.rnb-account-shell-orb--3 {
+  width: min(300px, 65vw);
+  height: min(300px, 65vw);
+  left: 42%;
+  bottom: -8%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-primary) 35%, #fff) 0%,
+    transparent 72%
+  );
+  animation: rnb-account-orb-c 10s ease-in-out infinite;
+}
+
+@keyframes rnb-account-orb-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(4%, -6%) scale(1.08);
+  }
+}
+
+@keyframes rnb-account-orb-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-6%, 4%);
+  }
+}
+
+@keyframes rnb-account-orb-c {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-48%, -5%) scale(1.06);
+  }
+}
+
+.rnb-account-shell-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 960px;
+  margin: auto;
+}

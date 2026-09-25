@@ -1,0 +1,127 @@
+.rnb-chart-expand-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.rnb-chart-expand-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+
+.rnb-chart-expand-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, calc(100vw - 32px));
+  height: auto;
+  max-height: min(90vh, 880px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: var(--radius-md, 12px);
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.22);
+  border: 1px solid var(--border-light);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Grid view: shrink-wrap to table height */
+.rnb-chart-expand-dialog--grid {
+  max-height: min(90vh, 880px);
+}
+
+.rnb-chart-expand-dialog--chart {
+  min-height: min(560px, 85vh);
+}
+
+.rnb-chart-expand-dialog--pie {
+  width: min(900px, calc(100vw - 32px));
+}
+
+.rnb-chart-expand-close {
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.rnb-chart-expand-filters {
+  flex-shrink: 0;
+  padding: 10px 20px 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-primary) 4%, #fff) 0%,
+    #fff 100%
+  );
+}
+
+.rnb-chart-expand-filters .rnb-applied-filters {
+  margin-bottom: 0;
+}
+
+.rnb-chart-expand-dialog .rnb-chart-panel-body--expanded {
+  flex: 0 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px 20px;
+}
+
+.rnb-chart-expand-dialog--chart .rnb-chart-panel-body--expanded {
+  flex: 1;
+  min-height: 0;
+}
+
+.rnb-chart-expand-dialog
+  .rnb-chart-panel-body--expanded:not(.rnb-chart-panel-body--grid) {
+  flex: 1;
+  min-height: min(480px, 58vh);
+  height: auto;
+}
+
+.rnb-chart-expand-dialog .rnb-chart-panel-body--expanded.rnb-chart-panel-body--grid {
+  height: auto;
+  min-height: 0;
+  padding: 16px 20px 20px;
+}
+
+.rnb-chart-expand-dialog--grid
+  .rnb-chart-panel-body--expanded.rnb-chart-panel-body--grid
+  .data-grid-wrapper--embedded {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.rnb-chart-expand-dialog--grid
+  .rnb-chart-panel-body--expanded.rnb-chart-panel-body--grid
+  .data-grid-scroll {
+  flex: 0 1 auto;
+  max-height: none;
+  overflow: visible;
+}
+
+@media (max-width: 640px) {
+  .rnb-chart-expand-root {
+    padding: 0;
+  }
+
+  .rnb-chart-expand-dialog {
+    width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .rnb-chart-expand-dialog--chart {
+    min-height: 100vh;
+  }
+
+  .rnb-widget-header--modal {
+    padding: 12px 14px;
+  }
+}

@@ -1,0 +1,269 @@
+@import './OverviewCardShine.css';
+
+.submodule-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 18px 18px 16px;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  border-color: color-mix(
+    in srgb,
+    var(--card-accent, var(--accent-primary)) 22%,
+    var(--border-light)
+  );
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--card-accent, var(--accent-primary)) 9%, #fff) 0%,
+    rgba(255, 255, 255, 0.94) 42%,
+    rgba(255, 255, 255, 0.88) 100%
+  );
+}
+
+.submodule-overview.glass-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--card-accent, var(--accent-primary));
+  opacity: 0.9;
+  z-index: 2;
+  transition:
+    width 0.25s ease,
+    opacity 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+a.submodule-overview--clickable {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    background 0.28s ease;
+}
+
+a.submodule-overview--clickable:hover,
+article.submodule-overview.rnb-overview-card-shine:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(
+    in srgb,
+    var(--card-accent, var(--accent-primary)) 42%,
+    var(--border-light)
+  );
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--card-accent, var(--accent-primary)) 11%, #fff) 0%,
+    rgba(255, 255, 255, 0.99) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 0 0 1px color-mix(
+      in srgb,
+      var(--card-accent, var(--accent-primary)) 12%,
+      transparent
+    ),
+    0 14px 32px color-mix(
+      in srgb,
+      var(--card-accent, var(--accent-primary)) 22%,
+      transparent
+    ),
+    0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+a.submodule-overview--clickable:hover::before {
+  width: 5px;
+  opacity: 1;
+  box-shadow: 0 0 14px color-mix(
+    in srgb,
+    var(--card-accent, var(--accent-primary)) 50%,
+    transparent
+  );
+}
+
+a.submodule-overview--clickable:active {
+  transform: translateY(-1px);
+  transition-duration: 0.12s;
+}
+
+a.submodule-overview--clickable:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+a.submodule-overview--clickable:hover .submodule-overview-title {
+  color: color-mix(
+    in srgb,
+    var(--card-accent, var(--accent-primary)) 78%,
+    var(--text-primary)
+  );
+}
+
+a.submodule-overview--clickable:hover .submodule-overview-icon-badge {
+  transform: scale(1.04);
+  box-shadow: 0 4px 12px color-mix(
+    in srgb,
+    var(--card-accent, var(--accent-primary)) 22%,
+    transparent
+  );
+}
+
+article.submodule-overview.glass-card {
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+article.submodule-overview.glass-card:hover {
+  transform: translateY(-3px);
+}
+
+.submodule-overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid color-mix(
+    in srgb,
+    var(--card-accent, var(--border-subtle)) 12%,
+    var(--border-subtle)
+  );
+  position: relative;
+  z-index: 1;
+}
+
+.submodule-overview-header-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.submodule-overview-icon-badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  color: var(--card-accent, var(--accent-primary));
+  background: color-mix(in srgb, var(--card-accent, var(--accent-primary)) 16%, #fff);
+  border: 1px solid color-mix(in srgb, var(--card-accent, var(--accent-primary)) 24%, transparent);
+  box-shadow: 0 2px 8px color-mix(
+    in srgb,
+    var(--card-accent, var(--accent-primary)) 14%,
+    transparent
+  );
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
+}
+
+.submodule-overview-icon-badge .rnb-nav-icon-svg {
+  display: block;
+}
+
+.submodule-overview-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  transition: color 0.25s ease;
+}
+
+.submodule-overview-count {
+  flex-shrink: 0;
+  min-width: 26px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--card-accent, var(--accent-primary));
+  background: color-mix(in srgb, var(--card-accent, var(--accent-primary)) 12%, #fff);
+  border: 1px solid color-mix(
+    in srgb,
+    var(--card-accent, var(--accent-primary)) 28%,
+    transparent
+  );
+}
+
+.submodule-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.submodule-overview-grid .rnb-stat-card--static {
+  padding: 10px 12px 11px;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 0 1px var(--border-subtle);
+}
+
+.submodule-overview-grid .rnb-stat-label {
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+.submodule-overview-grid .rnb-stat-value {
+  font-size: 1.15rem;
+}
+
+.submodule-overview-empty,
+.submodule-overview-error {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+a.submodule-overview--clickable:hover .rnb-stat-card--static {
+  background: rgba(255, 255, 255, 0.98);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 16px rgba(15, 23, 42, 0.06),
+    inset 0 0 0 1px rgba(2, 132, 199, 0.12);
+  z-index: 1;
+}
+
+a.submodule-overview--clickable:hover .rnb-stat-card--static::before {
+  width: 5px;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.submodule-overview--clickable,
+  article.submodule-overview.glass-card,
+  .link-overview-card--clickable {
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+}
+
+@media (max-width: 900px) {
+  .submodule-overview-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .submodule-overview-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 400px) {
+  .submodule-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}

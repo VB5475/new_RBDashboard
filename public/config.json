@@ -1,0 +1,27 @@
+{
+ "CK_Dsh_DBLogin": "dashboardws_V4",
+ "CK_Dsh_Strobes": "https://strobes.in",
+ "CK_Dsh_MMGSY": "http://182.72.220.203",
+ "CK_Dsh_Gujrams": "https://gujrams.gujarat.gov.in",
+ "CK_Dsh_Gujmarg": "https://margsahayak.gujarat.gov.in/#/Login",
+ "CK_Dsh_DBData": "dashboardWS_V4",
+ "CK_Dsh_DBData3": "dashboardWS_V4",
+ "MAP_URL": "https://wb.pmgatishakti.gov.in/FindRoad",
+ "DATAPOOL_RESOURCE": "JobSchedulerApp",
+ "USER_NAME": "admin",
+ "PASSWORD": "password123",
+ "MANUAL_URL": "RNB_PM/Docs/DT_Template/PMUserManualforDataEntryUser.pdf",
+ "MAP_URL_ACCESS_TOKEN": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJua24iLCJpYXQiOjE3MjEzNzYzNjcsImV4cCI6MTcyMTM3ODE2N30.AGEDs9Qp1F52kPDy2zUt5ElD20_9f6BnPFr8M9hubVMworkid=NH5",
+ "MAP_CREDENTIALS": {
+  "username": "gujarat",
+  "password": "Gujarat@123"
+ },
+ "MOBILEAPP_LINK": "https://drive.google.com/uc?export=download&id=1-4ag72eyuLEk8sZner090WTd0P1ZuWSv",
+ "SHOW_TRAFFIC_STATUS": true,
+ "testurl": "testurl",
+ "configSideBarColors": {
+  "useSecondarySidebarBackground": false,
+  "sidebarPrimary": "#1a3a6e",
+  "sidebarSecondary": "rgba(248, 250, 252, 0.95)"
+ }
+}

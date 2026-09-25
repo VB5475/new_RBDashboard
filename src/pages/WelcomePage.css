@@ -1,0 +1,75 @@
+.welcome-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(160deg, var(--bg-primary), var(--bg-secondary));
+}
+
+.welcome-card {
+  max-width: 520px;
+  width: 100%;
+  padding: 40px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.welcome-emblem {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-primary);
+  background: var(--accent-primary-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.welcome-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  background: var(--accent-primary-dim);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-accent);
+}
+
+.welcome-card h1 {
+  font-size: clamp(22px, 4vw, 28px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.welcome-card p {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.welcome-divider {
+  width: 56px;
+  height: 3px;
+  background: var(--accent-primary);
+  border-radius: 2px;
+  margin: 8px 0 4px;
+}
+
+.welcome-continue {
+  margin-top: 8px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent-primary);
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+}

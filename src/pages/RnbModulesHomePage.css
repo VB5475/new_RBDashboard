@@ -1,0 +1,109 @@
+.rnb-modules-home {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-bottom: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.submodule-overview--clickable:hover,
+  article.submodule-overview.glass-card:hover,
+  .link-overview-card--clickable:hover,
+  a.submodule-overview--clickable:hover .rnb-stat-card--static {
+    transform: none;
+  }
+
+  .link-overview-card--clickable:hover .link-overview-card-external-icon {
+    transform: none;
+  }
+}
+
+.rnb-modules-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rnb-modules-group-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0 12px;
+  margin-bottom: 2px;
+  border-bottom: 1px solid color-mix(
+    in srgb,
+    var(--group-accent, var(--border-subtle)) 14%,
+    var(--border-subtle)
+  );
+}
+
+.rnb-modules-group-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: var(--group-accent, var(--accent-primary));
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--group-accent, var(--accent-primary)) 18%, #fff) 0%,
+    color-mix(in srgb, var(--group-accent, var(--accent-primary)) 8%, #fff) 100%
+  );
+  border: 1px solid color-mix(
+    in srgb,
+    var(--group-accent, var(--accent-primary)) 24%,
+    transparent
+  );
+  box-shadow: 0 2px 10px color-mix(
+    in srgb,
+    var(--group-accent, var(--accent-primary)) 12%,
+    transparent
+  );
+}
+
+.rnb-modules-group-head-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+
+.rnb-modules-group-head h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+.rnb-modules-group-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: color-mix(
+    in srgb,
+    var(--group-accent, var(--text-muted)) 55%,
+    var(--text-muted)
+  );
+}
+
+.rnb-modules-group-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.rnb-modules-group--important-links .rnb-modules-group-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .rnb-modules-group-grid,
+  .rnb-modules-group--important-links .rnb-modules-group-grid {
+    grid-template-columns: 1fr;
+  }
+}
