@@ -11,8 +11,8 @@
   border-bottom: 1px solid color-mix(in srgb, var(--accent-primary) 10%, var(--border-subtle));
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--accent-primary) 9%, #fff) 0%,
-    rgba(255, 255, 255, 0.94) 100%
+    color-mix(in srgb, var(--accent-primary) 9%, var(--surface-mix)) 0%,
+    var(--bg-card-2) 100%
   );
 }
 
@@ -20,8 +20,8 @@
   padding: 16px 20px;
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--accent-primary) 11%, #fff) 0%,
-    rgba(255, 255, 255, 0.97) 100%
+    color-mix(in srgb, var(--accent-primary) 11%, var(--surface-mix)) 0%,
+    var(--bg-card-hover) 100%
   );
 }
 
@@ -89,13 +89,13 @@
 }
 
 .rnb-widget-header-actions .rnb-chart-grid-toggle {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--bg-card-2);
   border-color: color-mix(in srgb, var(--accent-primary) 18%, var(--border-light));
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
 
 .rnb-widget-header-actions .rnb-chart-action {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--bg-card-2);
   border-color: color-mix(in srgb, var(--accent-primary) 16%, var(--border-light));
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }

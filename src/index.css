@@ -1,12 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
 
 :root {
+ color-scheme: light;
+
  /* Core Colors */
  --bg-primary: #f8fafc;
  --bg-secondary: #f1f5f9;
  --bg-card: rgba(255, 255, 255, 0.85);
+ --bg-card-2: rgba(255, 255, 255, 0.92);
  --bg-card-hover: rgba(255, 255, 255, 1);
+ --bg-card-solid: #ffffff;
+ --bg-elevated: #ffffff;
+ --bg-subtle: #f8fafc;
+ --bg-muted: #f1f5f9;
  --bg-sidebar: #1a3a6e;
+ --bg-sidebar-deep: var(--bg-sidebar);
+
+ /* Base color every accent tint is mixed into — flips per theme */
+ --surface-mix: #ffffff;
 
  /* Accent Colors */
  --accent-primary: #0284c7;
@@ -20,6 +31,9 @@
  --accent-amber-dim: rgba(217, 119, 6, 0.15);
  --accent-purple: #7c3aed;
  --accent-purple-dim: rgba(124, 58, 237, 0.15);
+
+ /* Text on an accent-filled surface */
+ --on-accent: #ffffff;
 
  /* Text Colors */
  --text-primary: #0f172a;
@@ -35,10 +49,26 @@
  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
  --shadow-glow: 0 4px 12px rgba(2, 132, 199, 0.1);
  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+ --scrim: rgba(15, 23, 42, 0.45);
 
  /* Glassmorphism */
  --glass-blur: 16px;
  --glass-bg: rgba(255, 255, 255, 0.8);
+
+ /* Hover shine sweep */
+ --shine-hi: rgba(255, 255, 255, 0.92);
+ --shine-mid: rgba(255, 255, 255, 0.55);
+ --shine-low: rgba(255, 255, 255, 0.35);
+ --shine-edge: rgba(255, 255, 255, 0.06);
+ --shine-blend: soft-light;
+
+ /* Data grid chrome (head bg/fg are scoped to .data-grid-wrapper) */
+ --grid-zebra: rgba(248, 250, 252, 0.85);
+
+ /* Charts */
+ --chart-grid: rgba(0, 0, 0, 0.06);
+ --chart-axis: #64748b;
+ --chart-label: #334155;
 
  /* Spacing */
  --sidebar-width: 260px;
@@ -54,6 +84,68 @@
  --transition-fast: 150ms ease;
  --transition-base: 250ms ease;
  --transition-slow: 400ms ease;
+}
+
+/* ===========================================================================
+   Dark theme — see .stitch/DESIGN.md
+   Applied by the bootstrap script in index.html before first paint.
+   =========================================================================== */
+html[data-theme='dark'] {
+ color-scheme: dark;
+
+ --bg-primary: #0b1220;
+ --bg-secondary: #111a2b;
+ --bg-card: rgba(17, 26, 43, 0.82);
+ --bg-card-2: rgba(19, 29, 48, 0.9);
+ --bg-card-hover: rgba(23, 34, 54, 0.95);
+ --bg-card-solid: #111a2b;
+ --bg-elevated: #131d30;
+ --bg-subtle: #0e1626;
+ --bg-muted: #1a2438;
+ --bg-sidebar-deep: #070d18;
+
+ --surface-mix: #101a2c;
+
+ --accent-primary: #38bdf8;
+ --accent-primary-dim: rgba(56, 189, 248, 0.14);
+ --accent-secondary: #22d3ee;
+ --accent-green: #34d399;
+ --accent-green-dim: rgba(52, 211, 153, 0.16);
+ --accent-red: #f87171;
+ --accent-red-dim: rgba(248, 113, 113, 0.16);
+ --accent-amber: #fbbf24;
+ --accent-amber-dim: rgba(251, 191, 36, 0.16);
+ --accent-purple: #a78bfa;
+ --accent-purple-dim: rgba(167, 139, 250, 0.16);
+
+ --on-accent: #05131f;
+
+ --text-primary: #e5eef8;
+ --text-secondary: #b6c4d6;
+ --text-muted: #8a9bb0;
+
+ --border-subtle: rgba(255, 255, 255, 0.07);
+ --border-light: rgba(255, 255, 255, 0.14);
+ --border-accent: rgba(56, 189, 248, 0.38);
+
+ --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.45);
+ --shadow-glow: 0 4px 14px rgba(56, 189, 248, 0.18);
+ --shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.55);
+ --scrim: rgba(2, 6, 16, 0.72);
+
+ --glass-bg: rgba(15, 24, 40, 0.78);
+
+ --shine-hi: rgba(226, 240, 255, 0.16);
+ --shine-mid: rgba(226, 240, 255, 0.08);
+ --shine-low: rgba(226, 240, 255, 0.05);
+ --shine-edge: rgba(226, 240, 255, 0.02);
+ --shine-blend: screen;
+
+ --grid-zebra: rgba(255, 255, 255, 0.025);
+
+ --chart-grid: rgba(255, 255, 255, 0.08);
+ --chart-axis: #8a9bb0;
+ --chart-label: #cbd8e8;
 }
 
 * {
@@ -80,6 +172,17 @@ body {
  color: var(--text-primary);
  -webkit-font-smoothing: antialiased;
  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Soft crossfade when toggling light ↔ dark (see .stitch/DESIGN.md) */
+@media (prefers-reduced-motion: no-preference) {
+ html,
+ body {
+  transition:
+   background-color 200ms ease,
+   color 200ms ease,
+   border-color 200ms ease;
+ }
 }
 
 /* Scrollbar */
@@ -204,6 +307,43 @@ body {
  .grid-2 {
   grid-template-columns: 1fr;
  }
+}
+
+/* Chart chrome follows the theme. Recharts writes these as SVG presentation
+   attributes, so plain CSS wins without touching the chart JSX. */
+.recharts-cartesian-grid line {
+ stroke: var(--chart-grid);
+}
+.recharts-label-list text {
+ fill: var(--chart-label);
+}
+
+html[data-theme='dark'] .recharts-cartesian-axis-tick-value,
+html[data-theme='dark'] .recharts-polar-angle-axis-tick-value,
+html[data-theme='dark'] .recharts-pie-label-text {
+ fill: var(--chart-axis);
+}
+html[data-theme='dark'] .recharts-cartesian-axis-line,
+html[data-theme='dark'] .recharts-cartesian-axis-tick-line {
+ stroke: var(--border-light);
+}
+html[data-theme='dark'] .recharts-legend-item-text {
+ color: var(--chart-axis) !important;
+}
+/* Default tooltip is inline-styled by Recharts */
+html[data-theme='dark'] .recharts-default-tooltip {
+ background: var(--bg-elevated) !important;
+ border: 1px solid var(--border-light) !important;
+ border-radius: var(--radius-sm);
+ box-shadow: var(--shadow-lg);
+ color: var(--text-primary) !important;
+}
+html[data-theme='dark'] .recharts-tooltip-label,
+html[data-theme='dark'] .recharts-tooltip-item {
+ color: var(--text-primary) !important;
+}
+html[data-theme='dark'] .recharts-tooltip-cursor {
+ fill: rgba(255, 255, 255, 0.05);
 }
 
 /* 3D Hover Effect for Bar Charts */

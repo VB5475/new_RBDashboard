@@ -23,10 +23,10 @@
   height: min(85vh, 780px);
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--bg-elevated);
   border-radius: var(--radius-md, 12px);
   overflow: hidden;
-  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.22);
+  box-shadow: var(--shadow-lg);
 }
 
 .rnb-work-map-header {
@@ -37,8 +37,8 @@
   border-bottom: 1px solid var(--border-subtle);
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--accent-primary) 11%, #fff) 0%,
-    #fff 100%
+    color-mix(in srgb, var(--accent-primary) 11%, var(--surface-mix)) 0%,
+    var(--bg-elevated) 100%
   );
 }
 
@@ -46,6 +46,7 @@
   margin: 0;
   font-size: 1.05rem;
   font-weight: 700;
+  color: var(--accent-primary);
 }
 
 .rnb-work-map-close {
@@ -56,7 +57,7 @@
   height: 34px;
   border: 1px solid var(--border-light);
   border-radius: 10px;
-  background: #fff;
+  background: var(--bg-elevated);
   cursor: pointer;
   color: var(--text-secondary);
 }
@@ -71,6 +72,26 @@
   width: 100%;
   height: 100%;
   z-index: 0;
+  background: #dbeafe;
+}
+
+.rnb-work-map-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-subtle, var(--bg-secondary));
+}
+
+.rnb-work-map-footer-close {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  background: var(--accent-primary);
+  color: var(--on-accent, #fff);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .rnb-work-map-empty {
@@ -79,4 +100,76 @@
   text-align: center;
   color: var(--text-muted);
   font-weight: 500;
+}
+
+.rnb-map-marker {
+  background: transparent;
+  border: none;
+}
+
+.rnb-map-marker span {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #0f172a;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.rnb-map-marker--start span {
+  background: #16a34a;
+}
+
+.rnb-map-marker--end span {
+  background: #dc2626;
+}
+
+.leaflet-container .leaflet-control-attribution {
+  font-size: 10px;
+  max-width: 70%;
+}
+
+.rnb-map-label {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(15, 23, 42, 0.18) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  color: #0f172a !important;
+  font-weight: 700;
+  padding: 2px 6px !important;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.rnb-map-label::before {
+  display: none !important;
+}
+
+.rnb-map-label--state {
+  font-size: 12px;
+  color: #075985 !important;
+}
+
+.rnb-map-label--district {
+  font-size: 11px;
+  color: #0369a1 !important;
+}
+
+.rnb-map-label--block {
+  font-size: 10px;
+  font-weight: 600;
+  color: #0c4a6e !important;
+}
+
+.rnb-map-label--village {
+  font-size: 9px;
+  font-weight: 600;
+  color: #334155 !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+}
+
+.rnb-map-popup-kind {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #64748b;
 }

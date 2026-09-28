@@ -6,10 +6,10 @@
   background: linear-gradient(
     90deg,
     var(--accent-amber-dim) 0%,
-    color-mix(in srgb, var(--accent-amber) 8%, #fff) 100%
+    color-mix(in srgb, var(--accent-amber) 8%, var(--surface-mix)) 100%
   );
   border-bottom: 1px solid color-mix(in srgb, var(--accent-amber) 25%, transparent);
-  color: color-mix(in srgb, var(--accent-amber) 85%, #451a03);
+  color: color-mix(in srgb, var(--accent-amber) 85%, var(--text-primary));
   flex-shrink: 0;
 }
 
@@ -27,7 +27,7 @@
   width: 28px;
   height: 28px;
   border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--accent-amber) 12%, #fff);
+  background: color-mix(in srgb, var(--accent-amber) 12%, var(--surface-mix));
   color: var(--accent-amber);
   border: 1px solid color-mix(in srgb, var(--accent-amber) 22%, transparent);
 }
@@ -51,7 +51,7 @@
 
 .broadcast-banner-nav button {
   border: 1px solid color-mix(in srgb, var(--accent-amber) 35%, transparent);
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--glass-bg);
   border-radius: 6px;
   width: 26px;
   height: 26px;
@@ -61,7 +61,7 @@
 }
 
 .broadcast-banner-nav button:hover {
-  background: #fff;
+  background: var(--bg-card-hover);
 }
 
 @media (max-width: 768px) {

@@ -235,7 +235,7 @@
 }
 
 .rnb-nav-sublist[style*='--group-accent'] {
-  background: color-mix(in srgb, var(--group-accent) 10%, white);
+  background: color-mix(in srgb, var(--group-accent) 10%, var(--surface-mix));
   border-left-color: var(--group-accent);
 }
 
@@ -405,7 +405,7 @@
   inset: 0;
   z-index: 105;
   border: none;
-  background: rgba(15, 23, 42, 0.35);
+  background: var(--scrim);
   cursor: pointer;
   backdrop-filter: blur(2px);
 }
@@ -621,4 +621,43 @@ html.sidebar-dark .rnb-sidebar-grievance:hover {
   background: #f1f5f9;
   color: #0f172a;
   box-shadow: none;
+}
+
+/* —— App dark theme: the rail sits one step below the canvas —— */
+html[data-theme='dark'] .rnb-sidebar,
+html[data-theme='dark'] .rnb-sidebar.is-mobile {
+  background: var(--bg-sidebar-deep);
+  border-right-color: var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+html[data-theme='dark'] .rnb-sidebar-top,
+html[data-theme='dark'] .rnb-sidebar-footer {
+  border-color: var(--border-subtle);
+}
+
+html[data-theme='dark'] .rnb-sidebar-search {
+  background: var(--bg-muted);
+  border-color: var(--border-light);
+}
+
+html[data-theme='dark'] .rnb-sidebar-search input {
+  color: var(--text-primary);
+}
+
+html[data-theme='dark'] .rnb-sidebar-search input::placeholder,
+html[data-theme='dark'] .rnb-sidebar-search-icon {
+  color: var(--text-muted);
+}
+
+html[data-theme='dark'] .rnb-sidebar-grievance {
+  background: var(--bg-muted);
+  border-color: var(--border-light);
+  color: var(--text-secondary);
+}
+
+html[data-theme='dark'] .rnb-sidebar-grievance:hover {
+  background: var(--accent-primary-dim);
+  border-color: var(--border-accent);
+  color: var(--accent-primary);
 }

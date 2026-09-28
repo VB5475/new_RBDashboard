@@ -4,6 +4,17 @@
   --grid-chrome: var(--bg-sidebar, #1a3a6e);
   --grid-accent: #38bdf8;
   --grid-accent-dim: rgba(56, 189, 248, 0.14);
+  --grid-head-bg: var(--grid-chrome);
+  --grid-head-fg: #e0f2fe;
+}
+
+/* Dark theme: the accent-blue header would glare across every table, so the
+   sticky head drops to a flat deep navy and the chrome becomes the readable cyan. */
+html[data-theme='dark'] .data-grid-wrapper {
+  --grid-chrome: var(--accent-primary);
+  --grid-accent-dim: rgba(56, 189, 248, 0.16);
+  --grid-head-bg: #12233c;
+  --grid-head-fg: #cfe4f7;
 }
 
 .data-grid-wrapper--plain {
@@ -19,6 +30,7 @@
 .data-grid-wrapper--embedded {
   --grid-chrome: var(--accent-primary, #0284c7);
   --grid-accent-dim: var(--accent-primary-dim, rgba(2, 132, 199, 0.12));
+  --grid-head-fg: #fff;
 }
 
 .data-grid-wrapper--embedded .data-grid-scroll {
@@ -29,10 +41,11 @@
 .data-grid-wrapper--dashboard {
   --grid-chrome: var(--accent-primary, #0284c7);
   --grid-accent-dim: var(--accent-primary-dim, rgba(2, 132, 199, 0.12));
+  --grid-head-fg: #fff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
   overflow: hidden;
-  background: #fff;
+  background: var(--bg-card-solid);
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -45,10 +58,10 @@
 .data-grid-wrapper--dashboard .data-grid-head-row th {
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--accent-primary) 92%, #0f172a) 0%,
-    var(--accent-primary) 100%
+    color-mix(in srgb, var(--grid-head-bg) 92%, #0f172a) 0%,
+    var(--grid-head-bg) 100%
   );
-  color: #fff;
+  color: var(--grid-head-fg);
   font-size: 10px;
   letter-spacing: 0.07em;
   border-bottom: none;
@@ -62,11 +75,11 @@
   padding: 9px 14px;
   font-size: 12px;
   line-height: 1.35;
-  border-bottom: 1px solid color-mix(in srgb, var(--border-subtle) 85%, #fff);
+  border-bottom: 1px solid color-mix(in srgb, var(--border-subtle) 85%, var(--surface-mix));
 }
 
 .data-grid-wrapper--dashboard .data-grid-table tbody tr:nth-child(even):not(.data-grid-total-row) {
-  background: color-mix(in srgb, var(--accent-primary) 5%, #fff);
+  background: color-mix(in srgb, var(--accent-primary) 5%, var(--surface-mix));
 }
 
 .data-grid-wrapper--dashboard .data-grid-table tbody tr.data-grid-total-row {
@@ -113,7 +126,7 @@
 }
 
 .data-grid-table tbody tr.data-grid-row--clickable:hover {
-  background: rgba(56, 189, 248, 0.12);
+  background: var(--grid-accent-dim);
 }
 
 .data-grid-row-hint {
@@ -133,8 +146,8 @@
   border-bottom: 1px solid var(--border-subtle);
   background: linear-gradient(
     180deg,
-    rgba(248, 250, 252, 0.95) 0%,
-    rgba(255, 255, 255, 0.9) 100%
+    var(--bg-subtle) 0%,
+    var(--bg-card-2) 100%
   );
 }
 
@@ -179,7 +192,8 @@
   padding: 9px 12px 9px 36px;
   font-size: 13px;
   min-width: min(280px, 70vw);
-  background: #fff;
+  background: var(--bg-card-solid);
+  color: var(--text-primary);
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
@@ -198,7 +212,7 @@
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   border: 1px solid color-mix(in srgb, var(--grid-chrome) 25%, var(--border-light));
-  background: #fff;
+  background: var(--bg-card-solid);
   font-size: 12px;
   font-weight: 600;
   color: var(--grid-chrome);
@@ -235,7 +249,7 @@
 /* Row group headers (Columns tool panel grouping) */
 .data-grid-table tbody tr.data-grid-group-row,
 .data-grid-table tbody tr.data-grid-group-row:hover {
-  background: color-mix(in srgb, var(--grid-chrome) 9%, #fff);
+  background: color-mix(in srgb, var(--grid-chrome) 9%, var(--surface-mix));
 }
 
 .data-grid-table tbody tr.data-grid-group-row td {
@@ -281,8 +295,8 @@
   position: sticky;
   top: 0;
   z-index: 3;
-  background: var(--grid-chrome);
-  color: #e0f2fe;
+  background: var(--grid-head-bg);
+  color: var(--grid-head-fg);
   text-align: left;
   padding: 0;
   font-weight: 700;
@@ -308,7 +322,7 @@
   /* Synced to real header height via --data-grid-head-height on .data-grid-scroll */
   top: var(--data-grid-head-height, 2.5rem);
   z-index: 2;
-  background: #f1f5f9;
+  background: var(--bg-muted);
   padding: 6px 8px;
   border-bottom: 1px solid var(--border-subtle);
   vertical-align: middle;
@@ -327,7 +341,7 @@
   overflow: hidden;
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--grid-accent-dim) 85%, #fff) 0%,
+    color-mix(in srgb, var(--grid-accent-dim) 85%, var(--surface-mix)) 0%,
     var(--grid-accent-dim) 100%
   );
   border-bottom: 0 solid transparent;
@@ -395,7 +409,7 @@
   padding: 3px 7px;
   border: 1px solid color-mix(in srgb, var(--grid-chrome) 28%, var(--border-light));
   border-radius: 999px;
-  background: #fff;
+  background: var(--bg-card-solid);
   color: var(--grid-chrome);
   font-size: 11px;
   font-weight: 600;
@@ -406,7 +420,7 @@
 }
 
 .data-grid-filter-chip:hover {
-  background: color-mix(in srgb, var(--grid-accent-dim) 70%, #fff);
+  background: color-mix(in srgb, var(--grid-accent-dim) 70%, var(--surface-mix));
   border-color: var(--grid-chrome);
 }
 
@@ -450,7 +464,7 @@
 }
 
 .data-grid-table tbody tr:nth-child(even) {
-  background: rgba(248, 250, 252, 0.85);
+  background: var(--grid-zebra);
 }
 
 .data-grid-table tbody tr {
@@ -490,7 +504,7 @@
   padding: 10px 20px 14px;
   font-size: 12px;
   color: var(--text-muted);
-  background: rgba(248, 250, 252, 0.9);
+  background: var(--bg-subtle);
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -520,7 +534,7 @@
   padding: 7px 12px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
-  background: #fff;
+  background: var(--bg-card-solid);
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
@@ -559,5 +573,5 @@
 }
 
 .data-grid-scroll::-webkit-scrollbar-track {
-  background: rgba(241, 245, 249, 0.8);
+  background: var(--bg-subtle);
 }

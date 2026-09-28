@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   border: none;
-  background: rgba(15, 23, 42, 0.55);
+  background: var(--scrim);
   backdrop-filter: blur(4px);
   z-index: 120;
 }
@@ -36,6 +36,11 @@
   padding: 14px 18px;
   background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
   color: #f0f9ff;
+}
+
+html[data-theme='dark'] .rnb-drilldown-header {
+  background: linear-gradient(135deg, #16324f 0%, #101f33 100%);
+  color: var(--text-primary);
 }
 
 .rnb-drilldown-heading {
@@ -114,7 +119,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: #fff;
+  background: var(--bg-elevated);
   padding: 16px 20px 20px;
 }
 

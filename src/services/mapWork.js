@@ -1,28 +1,10 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import {
-  MAP_URL,
-  MAP_CREDENTIALS,
   WSMIS_URL,
   BASIC_TOKEN_HEADER,
   FETCH_WORK_DATA_FOR_MAP,
 } from '../config/api.config';
-
-export async function fetchMapApiToken() {
-  if (!MAP_URL || !MAP_CREDENTIALS?.username) {
-    throw new Error('Map service is not configured');
-  }
-  const response = await fetch(`${MAP_URL}/token`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(MAP_CREDENTIALS),
-  });
-  if (!response.ok) {
-    throw new Error('Failed to fetch map token');
-  }
-  const data = await response.json();
-  return data?.token ?? null;
-}
 
 export async function fetchWorkDataForMap({ workId, source = 'Strobes' }) {
   const params = new URLSearchParams({
@@ -52,15 +34,20 @@ export function parseWorkMapGeometry(record) {
     !Number.isFinite(startLon) ||
     !Number.isFinite(endLat) ||
     !Number.isFinite(endLon) ||
-    (startLat === 0 && startLon === 0 && endLat === 0 && endLon === 0)
+    !startLat ||
+    !startLon ||
+    !endLat ||
+    !endLon
   ) {
     return null;
   }
   return {
-    workId: record.WorkID,
-    description: record.Description ?? '',
-    roadCat: record.RoadCat ?? '',
-    start: [startLat, startLon],
-    end: [endLat, endLon],
+    WorkID: parseFloat(record.WorkID) || record.WorkID,
+    StartLatitude: startLat,
+    StartLongitude: startLon,
+    EndLatitude: endLat,
+    EndLongitude: endLon,
+    Description: record.Description ?? '',
+    RoadCat: record.RoadCat ?? '',
   };
 }

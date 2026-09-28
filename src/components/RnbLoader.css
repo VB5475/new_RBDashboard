@@ -192,13 +192,13 @@
   border-radius: var(--radius-xl);
   background: linear-gradient(
     165deg,
-    rgba(255, 255, 255, 0.98) 0%,
-    color-mix(in srgb, var(--accent-primary) 7%, #fff) 100%
+    var(--bg-elevated) 0%,
+    color-mix(in srgb, var(--accent-primary) 7%, var(--surface-mix)) 100%
   );
   border: 1px solid color-mix(in srgb, var(--accent-primary) 28%, var(--border-subtle));
   box-shadow:
     0 24px 48px color-mix(in srgb, var(--accent-primary) 18%, transparent),
-    0 0 0 1px rgba(255, 255, 255, 0.85) inset;
+    0 0 0 1px var(--shine-mid) inset;
   overflow: hidden;
   animation: rnb-loader-card-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -356,8 +356,8 @@
   height: 40px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #fff;
-  border: 2px solid color-mix(in srgb, var(--accent-primary) 35%, #fff);
+  background: var(--bg-card-solid, #fff);
+  border: 2px solid color-mix(in srgb, var(--accent-primary) 35%, var(--surface-mix, #fff));
   box-shadow:
     0 0 0 4px color-mix(in srgb, var(--accent-primary) 12%, transparent),
     0 8px 20px color-mix(in srgb, var(--accent-primary) 28%, transparent);

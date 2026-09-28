@@ -20,8 +20,8 @@ export default defineConfig({
             if (id.includes('recharts') || id.includes('d3')) {
               return 'recharts'; // Put recharts + d3 dependencies together
             }
-            if (id.includes('leaflet')) {
-              return 'leaflet'; // Leaflet dependencies
+            if (id.includes('leaflet') || id.includes('esri-leaflet')) {
+              return 'maps';
             }
             if (id.includes('react')) {
               return 'react'; // React core

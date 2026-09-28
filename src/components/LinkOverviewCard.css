@@ -9,8 +9,8 @@
   padding: 12px 14px 12px 14px;
   background: linear-gradient(
     120deg,
-    color-mix(in srgb, var(--link-card-accent, #22c55e) 8%, #fff) 0%,
-    rgba(255, 255, 255, 0.92) 55%
+    color-mix(in srgb, var(--link-card-accent, #22c55e) 8%, var(--surface-mix)) 0%,
+    var(--bg-card-2) 55%
   );
   min-height: 0;
   position: relative;
@@ -38,11 +38,11 @@
   );
   background: linear-gradient(
     120deg,
-    color-mix(in srgb, var(--link-card-accent, #22c55e) 10%, #fff) 0%,
-    rgba(255, 255, 255, 0.99) 50%
+    color-mix(in srgb, var(--link-card-accent, #22c55e) 10%, var(--surface-mix)) 0%,
+    var(--bg-card-hover) 50%
   );
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 1px 0 var(--shine-hi),
     0 0 0 1px color-mix(
       in srgb,
       var(--link-card-accent, #22c55e) 14%,
@@ -109,7 +109,7 @@
   background: color-mix(
     in srgb,
     var(--link-card-accent, #22c55e) 14%,
-    #fff
+    var(--surface-mix)
   );
   border: 1px solid color-mix(
     in srgb,

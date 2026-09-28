@@ -31,6 +31,7 @@ import {
 } from 'recharts';
 
 import DataGrid from './grid/DataGrid';
+import { useTheme } from '../hooks/useTheme';
 import {
   barColorAt,
   chartFallbackPalette,
@@ -39,7 +40,28 @@ import {
   resolveSeriesColor,
 } from '../utils/chartApiColors';
 
-
+function readChartTheme() {
+  if (typeof document === 'undefined') {
+    return {
+      grid: 'rgba(0,0,0,0.06)',
+      axis: '#64748b',
+      label: '#334155',
+      tooltipBg: '#ffffff',
+      tooltipFg: '#0f172a',
+      tooltipBorder: 'rgba(0,0,0,0.12)',
+    };
+  }
+  const s = getComputedStyle(document.documentElement);
+  const v = (name, fallback) => s.getPropertyValue(name).trim() || fallback;
+  return {
+    grid: v('--chart-grid', 'rgba(0,0,0,0.06)'),
+    axis: v('--chart-axis', '#64748b'),
+    label: v('--chart-label', '#334155'),
+    tooltipBg: v('--bg-elevated', '#ffffff'),
+    tooltipFg: v('--text-primary', '#0f172a'),
+    tooltipBorder: v('--border-light', 'rgba(0,0,0,0.12)'),
+  };
+}
 
 function buildChartRows(chart) {
 
@@ -434,6 +456,8 @@ export default function RnbChartBody({
   size = 'card',
 
 }) {
+  const { theme } = useTheme();
+  const chartTheme = useMemo(() => readChartTheme(), [theme]);
 
   const data = buildChartRows(chart);
 
@@ -444,6 +468,13 @@ export default function RnbChartBody({
   const seriesCount = seriesKeys.length;
 
   const plotHostRef = useRef(null);
+
+  const tooltipStyle = {
+    backgroundColor: chartTheme.tooltipBg,
+    color: chartTheme.tooltipFg,
+    border: `1px solid ${chartTheme.tooltipBorder}`,
+    borderRadius: 8,
+  };
 
 
 
@@ -544,7 +575,7 @@ export default function RnbChartBody({
 
     fontSize: barLabelFontSize,
 
-    fill: '#334155',
+    fill: chartTheme.label,
 
     formatter: (value) => formatChartValue(value),
 
@@ -592,7 +623,7 @@ export default function RnbChartBody({
 
     >
 
-      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
+      <CartesianGrid strokeDasharray="3 3" stroke={chartTheme.grid} vertical={false} />
 
       <XAxis
 
@@ -610,6 +641,8 @@ export default function RnbChartBody({
 
           textAnchor: xLayout.textAnchor,
 
+          fill: chartTheme.axis,
+
         }}
 
       />
@@ -620,7 +653,7 @@ export default function RnbChartBody({
 
         domain={yLayout.domain}
 
-        tick={{ fontSize: size === 'expanded' ? 11 : 10 }}
+        tick={{ fontSize: size === 'expanded' ? 11 : 10, fill: chartTheme.axis }}
 
         tickFormatter={yLayout.tickFormatter}
 
@@ -628,7 +661,12 @@ export default function RnbChartBody({
 
       />
 
-      <Tooltip formatter={(value) => formatChartValue(value)} />
+      <Tooltip
+        formatter={(value) => formatChartValue(value)}
+        contentStyle={tooltipStyle}
+        labelStyle={{ color: chartTheme.tooltipFg }}
+        itemStyle={{ color: chartTheme.tooltipFg }}
+      />
 
       {seriesKeys.map((key, i) => {
         const ds = chart.datasets[i];
@@ -674,7 +712,7 @@ export default function RnbChartBody({
 
     >
 
-      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" />
+      <CartesianGrid strokeDasharray="3 3" stroke={chartTheme.grid} />
 
       <XAxis
 
@@ -692,6 +730,8 @@ export default function RnbChartBody({
 
           textAnchor: xLayout.textAnchor,
 
+          fill: chartTheme.axis,
+
         }}
 
       />
@@ -702,7 +742,7 @@ export default function RnbChartBody({
 
         domain={yLayout.domain}
 
-        tick={{ fontSize: size === 'expanded' ? 11 : 10 }}
+        tick={{ fontSize: size === 'expanded' ? 11 : 10, fill: chartTheme.axis }}
 
         tickFormatter={yLayout.tickFormatter}
 
@@ -710,7 +750,12 @@ export default function RnbChartBody({
 
       />
 
-      <Tooltip formatter={(value) => formatChartValue(value)} />
+      <Tooltip
+        formatter={(value) => formatChartValue(value)}
+        contentStyle={tooltipStyle}
+        labelStyle={{ color: chartTheme.tooltipFg }}
+        itemStyle={{ color: chartTheme.tooltipFg }}
+      />
 
       {seriesKeys.map((key, i) => {
         const stroke = resolveSeriesColor(chart.datasets[i], i, colorPalette);
@@ -774,7 +819,11 @@ export default function RnbChartBody({
 
       </Pie>
 
-      <Tooltip />
+      <Tooltip
+        contentStyle={tooltipStyle}
+        labelStyle={{ color: chartTheme.tooltipFg }}
+        itemStyle={{ color: chartTheme.tooltipFg }}
+      />
 
     </PieChart>
 

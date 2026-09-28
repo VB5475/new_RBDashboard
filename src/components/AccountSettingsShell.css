@@ -13,7 +13,7 @@
     168deg,
     var(--bg-primary, #f8fafc) 0%,
     color-mix(in srgb, var(--accent-primary, #0284c7) 9%, var(--bg-secondary, #f1f5f9)) 55%,
-    color-mix(in srgb, var(--accent-primary, #0284c7) 5%, #fff) 100%
+    color-mix(in srgb, var(--accent-primary, #0284c7) 5%, var(--surface-mix)) 100%
   );
 }
 

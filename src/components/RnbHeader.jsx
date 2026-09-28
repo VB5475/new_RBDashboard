@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
-import { Bell, Coins, Home, Menu } from 'lucide-react';
+import { Bell, Coins, Home, Menu, Moon, Sun } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useUser } from '../context/UserContext';
+import { useTheme } from '../hooks/useTheme';
 import { isOverviewRoutePath, pickDefaultLandingPath } from '../constants/routes';
 import { getMotherLinkTarget, getPageHeading } from '../utils/pageHeading';
 import { openMotherLogin } from '../services/motherLogin';
@@ -37,6 +38,7 @@ export default function RnbHeader({
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useUser();
+  const { isDark, toggleTheme } = useTheme();
 
   const hasMessages = messages.length > 0;
 
@@ -137,6 +139,17 @@ export default function RnbHeader({
 
         <div className="rnb-page-header-actions">
           {showServerTime ? <OverviewServerTime variant="header" /> : null}
+
+          <button
+            type="button"
+            className="rnb-header-icon-btn rnb-header-theme-toggle"
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+            aria-pressed={isDark}
+            title={isDark ? 'Light mode' : 'Dark mode'}
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
 
           {isLg && showHome ? (
             <button

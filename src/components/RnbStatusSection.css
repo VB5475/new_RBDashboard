@@ -24,8 +24,8 @@
   border-bottom: 1px solid var(--border-subtle);
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 250, 252, 0.85) 100%
+    var(--bg-card-2) 0%,
+    var(--bg-subtle) 100%
   );
 }
 
@@ -66,7 +66,7 @@
   padding: 0;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-accent);
-  background: white;
+  background: var(--bg-card-solid);
   color: rgb(91, 76, 226);
   cursor: pointer;
   transition:
@@ -81,6 +81,14 @@
   box-shadow: 0 4px 12px rgba(91, 76, 226, 0.15);
 }
 
+html[data-theme='dark'] .rnb-status-drilldown-btn {
+  color: var(--accent-purple);
+}
+
+html[data-theme='dark'] .rnb-status-drilldown-btn:hover {
+  background: var(--accent-purple-dim);
+}
+
 .rnb-status-filter-btn {
   display: inline-flex;
   align-items: center;
@@ -88,7 +96,7 @@
   padding: 6px 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-accent);
-  background: white;
+  background: var(--bg-card-solid);
   color: var(--accent-primary);
   font-size: 13px;
   font-weight: 600;

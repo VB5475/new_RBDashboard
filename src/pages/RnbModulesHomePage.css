@@ -47,8 +47,8 @@
   color: var(--group-accent, var(--accent-primary));
   background: linear-gradient(
     145deg,
-    color-mix(in srgb, var(--group-accent, var(--accent-primary)) 18%, #fff) 0%,
-    color-mix(in srgb, var(--group-accent, var(--accent-primary)) 8%, #fff) 100%
+    color-mix(in srgb, var(--group-accent, var(--accent-primary)) 18%, var(--surface-mix)) 0%,
+    color-mix(in srgb, var(--group-accent, var(--accent-primary)) 8%, var(--surface-mix)) 100%
   );
   border: 1px solid color-mix(
     in srgb,

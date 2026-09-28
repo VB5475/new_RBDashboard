@@ -10,13 +10,16 @@ import {
   Download,
   Eye,
   EyeOff,
+  Moon,
   RefreshCw,
   ShieldCheck,
+  Sun,
 } from 'lucide-react';
 import { pickDefaultLandingPath } from '../constants/routes';
 import { login } from '../services/auth';
 import { fetchUserVisitStats } from '../services/loginAnalytics';
 import { useUser } from '../context/UserContext';
+import { useTheme } from '../hooks/useTheme';
 import { isAuthenticated } from '../utils/session';
 import {
   MOBILEAPP_LINK,
@@ -46,10 +49,15 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
   const { user, setUser } = useUser();
+  const { isDark, toggleTheme } = useTheme();
 
   const reloadCaptcha = useCallback(() => {
-    loadCaptchaEnginge(6, '#f8fafc', '#334155', 'numbers');
-  }, []);
+    if (isDark) {
+      loadCaptchaEnginge(6, '#111a2b', '#e5eef8', 'numbers');
+    } else {
+      loadCaptchaEnginge(6, '#f8fafc', '#334155', 'numbers');
+    }
+  }, [isDark]);
 
   useEffect(() => {
     reloadCaptcha();
@@ -131,12 +139,24 @@ export default function LoginPage() {
             <p className="login-topbar-tagline">Integrated Dashboard And Analytics Portal</p>
           </div>
         </div>
-        {MOBILEAPP_LINK ? (
-          <button type="button" className="login-app-cta" onClick={() => setQrOpen(true)}>
-            <Download size={18} />
-            <span>Download RNB Mobile App</span>
+        <div className="login-topbar-actions">
+          <button
+            type="button"
+            className="login-theme-toggle"
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+            aria-pressed={isDark}
+            title={isDark ? 'Light mode' : 'Dark mode'}
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
-        ) : null}
+          {MOBILEAPP_LINK ? (
+            <button type="button" className="login-app-cta" onClick={() => setQrOpen(true)}>
+              <Download size={18} />
+              <span>Download RNB Mobile App</span>
+            </button>
+          ) : null}
+        </div>
       </header>
 
       <LoginQrModal open={qrOpen} onClose={() => setQrOpen(false)} />

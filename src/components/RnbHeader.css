@@ -5,7 +5,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #fff;
+  background: var(--bg-elevated);
   border-bottom: 1px solid var(--border-subtle);
   box-shadow: 0 1px 0 color-mix(in srgb, var(--accent-primary) 6%, transparent);
 }
@@ -20,8 +20,8 @@
   min-height: 46px;
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--accent-primary) 6%, #fff) 0%,
-    rgba(255, 255, 255, 0.98) 42%,
+    color-mix(in srgb, var(--accent-primary) 6%, var(--surface-mix)) 0%,
+    var(--bg-elevated) 42%,
     color-mix(in srgb, var(--accent-primary) 4%, var(--bg-secondary)) 100%
   );
   backdrop-filter: blur(calc(var(--glass-blur) * 0.75));
@@ -223,6 +223,30 @@
   transform: translateY(-1px);
 }
 
+.rnb-header-theme-toggle svg {
+  transition: transform var(--transition-base);
+}
+
+.rnb-header-theme-toggle:hover svg {
+  transform: rotate(-20deg);
+}
+
+html[data-theme='dark'] .rnb-header-theme-toggle {
+  color: var(--accent-amber);
+  border-color: color-mix(in srgb, var(--accent-amber) 26%, var(--border-light));
+}
+
+html[data-theme='dark'] .rnb-header-theme-toggle:hover {
+  background: var(--accent-amber-dim);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-amber) 22%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rnb-header-theme-toggle:hover svg {
+    transform: none;
+  }
+}
+
 .rnb-header-bell-badge {
   position: absolute;
   top: 6px;
@@ -231,7 +255,7 @@
   height: 8px;
   border-radius: 50%;
   background: var(--accent-red);
-  border: 1px solid #fff;
+  border: 1px solid var(--bg-elevated);
   animation: rnb-bell-pulse 1.5s infinite;
 }
 

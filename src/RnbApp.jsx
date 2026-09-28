@@ -156,7 +156,17 @@ export default function RnbApp() {
     <QueryClientProvider client={queryClient}>
       <SessionBootstrap>
         <WelcomeGate>
-          <Toaster position="top-right" />
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: 'var(--bg-elevated)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--border-light)',
+                boxShadow: 'var(--shadow-lg)',
+              },
+            }}
+          />
           <DynamicRoutes />
         </WelcomeGate>
       </SessionBootstrap>

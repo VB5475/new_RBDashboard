@@ -18,8 +18,8 @@
   border-bottom: 1px solid var(--border-subtle);
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--accent-primary) 10%, #fff) 0%,
-    rgba(255, 255, 255, 0.96) 100%
+    color-mix(in srgb, var(--accent-primary) 10%, var(--surface-mix)) 0%,
+    var(--bg-card-2) 100%
   );
 }
 
@@ -88,7 +88,8 @@
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-light);
   font-size: 14px;
-  background: #fff;
+  background: var(--bg-card-solid);
+  color: var(--text-primary);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -142,7 +143,7 @@
   font-weight: 700;
   border: 1px solid var(--border-light);
   cursor: pointer;
-  background: #fff;
+  background: var(--bg-card-solid);
   color: var(--text-secondary);
   text-decoration: none;
 }
@@ -150,19 +151,19 @@
 .rnb-account-btn--primary {
   background: var(--accent-primary);
   border-color: var(--accent-primary);
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .rnb-account-btn--danger {
-  background: #fff;
-  border-color: #fecaca;
-  color: #b91c1c;
+  background: var(--bg-card-solid);
+  border-color: color-mix(in srgb, var(--accent-red) 35%, transparent);
+  color: var(--accent-red);
 }
 
 .rnb-account-btn--success {
-  background: #059669;
-  border-color: #059669;
-  color: #fff;
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: var(--on-accent);
 }
 
 .rnb-account-btn:disabled {
@@ -174,7 +175,7 @@
   padding: 16px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-light);
-  background: color-mix(in srgb, var(--accent-primary) 4%, #fff);
+  background: color-mix(in srgb, var(--accent-primary) 4%, var(--surface-mix));
 }
 
 .rnb-account-policy h2 {
@@ -249,19 +250,19 @@
 }
 
 .rnb-account-match-hint.is-ok {
-  background: rgba(5, 150, 105, 0.1);
-  color: #047857;
+  background: var(--accent-green-dim);
+  color: var(--accent-green);
 }
 
 .rnb-account-match-hint.is-bad {
-  background: rgba(239, 68, 68, 0.08);
-  color: #b91c1c;
+  background: var(--accent-red-dim);
+  color: var(--accent-red);
 }
 
 .rnb-account-card {
   box-shadow:
     0 20px 40px color-mix(in srgb, var(--accent-primary) 12%, transparent),
-    0 0 0 1px rgba(255, 255, 255, 0.65) inset;
+    0 0 0 1px var(--shine-mid) inset;
 }
 
 .rnb-account-loading {

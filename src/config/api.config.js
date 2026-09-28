@@ -53,6 +53,10 @@ export let WS_DASH_URL;
 export let WSMIS_URL;
 export let MAP_URL;
 export let MAP_CREDENTIALS = null;
+/** NIC Bharat Maps MapServer (SoI-aligned — preferred over OSM for gov portals) */
+export let BHARAT_MAPS_URL =
+  'https://mapservice.gov.in/mapserviceserv176/rest/services/Panchayat/AdminGPHierarchy/MapServer';
+export let BHARAT_MAPS_TOKEN = '';
 export let BASIC_TOKEN_HEADER = {};
 export let SIDEBAR_COLOR_CONFIG = null;
 
@@ -93,6 +97,13 @@ export function loadConfig(config) {
   DDL_DRPT_URL = `${CK_Dsh_DBData3}/webservice/wsMIS_DRPT.asmx`;
   MAP_URL = config.MAP_URL ?? '';
   MAP_CREDENTIALS = config.MAP_CREDENTIALS ?? null;
+  BHARAT_MAPS_URL =
+    config.BHARAT_MAPS_URL ||
+    'https://mapservice.gov.in/mapserviceserv176/rest/services/Panchayat/AdminGPHierarchy/MapServer';
+  BHARAT_MAPS_TOKEN =
+    config.BHARAT_MAPS_TOKEN ||
+    import.meta.env.VITE_BHARAT_MAPS_TOKEN ||
+    '';
 
   SIDEBAR_COLOR_CONFIG = config.configSideBarColors ?? null;
   applySidebarBackgroundFromConfig(config);

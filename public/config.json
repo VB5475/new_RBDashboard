@@ -7,6 +7,8 @@
  "CK_Dsh_DBData": "dashboardWS_V4",
  "CK_Dsh_DBData3": "dashboardWS_V4",
  "MAP_URL": "https://wb.pmgatishakti.gov.in/FindRoad",
+ "BHARAT_MAPS_URL": "https://mapservice.gov.in/mapserviceserv176/rest/services/Panchayat/AdminGPHierarchy/MapServer",
+ "BHARAT_MAPS_TOKEN": "",
  "DATAPOOL_RESOURCE": "JobSchedulerApp",
  "USER_NAME": "admin",
  "PASSWORD": "password123",

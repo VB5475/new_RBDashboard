@@ -12,8 +12,8 @@
   padding: 0 8px 0 6px;
   border-radius: var(--radius-sm);
   border: 1px solid color-mix(in srgb, var(--accent-primary) 20%, var(--border-light));
-  background: color-mix(in srgb, var(--accent-primary) 6%, #fff);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  background: color-mix(in srgb, var(--accent-primary) 6%, var(--surface-mix));
+  box-shadow: inset 0 1px 0 var(--shine-mid);
 }
 
 .overview-server-time--page {
@@ -23,8 +23,8 @@
   border: 1px solid color-mix(in srgb, var(--accent-primary) 22%, var(--border-light));
   background: linear-gradient(
     120deg,
-    color-mix(in srgb, var(--accent-primary) 8%, #fff) 0%,
-    rgba(255, 255, 255, 0.94) 55%
+    color-mix(in srgb, var(--accent-primary) 8%, var(--surface-mix)) 0%,
+    var(--bg-card-2) 55%
   );
 }
 
@@ -96,7 +96,7 @@
   color: var(--accent-primary);
   padding: 4px 8px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent-primary) 10%, #fff);
+  background: color-mix(in srgb, var(--accent-primary) 10%, var(--surface-mix));
   border: 1px solid color-mix(in srgb, var(--accent-primary) 20%, transparent);
 }
 

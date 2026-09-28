@@ -23,7 +23,7 @@
   z-index: 111;
   padding: 0;
   border-radius: var(--radius-md);
-  background: #fff;
+  background: var(--bg-elevated);
 }
 
 .data-modal.glass-card:hover {
@@ -40,8 +40,8 @@
   border-bottom: 1px solid color-mix(in srgb, var(--accent-primary) 12%, var(--border-subtle));
   background: linear-gradient(
     180deg,
-    color-mix(in srgb, var(--accent-primary) 11%, #fff) 0%,
-    rgba(255, 255, 255, 0.97) 100%
+    color-mix(in srgb, var(--accent-primary) 11%, var(--surface-mix)) 0%,
+    var(--bg-elevated) 100%
   );
   color: var(--text-primary);
 }
@@ -71,7 +71,7 @@
   height: 34px;
   border: 1px solid var(--border-light);
   border-radius: 10px;
-  background: #fff;
+  background: var(--bg-elevated);
   font-size: 22px;
   line-height: 1;
   cursor: pointer;
@@ -89,7 +89,7 @@
   display: flex;
   flex-direction: column;
   padding: 16px 20px 20px;
-  background: #fff;
+  background: var(--bg-elevated);
 }
 
 .data-modal .data-grid-wrapper {

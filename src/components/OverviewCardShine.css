@@ -17,11 +17,11 @@
   background: linear-gradient(
     100deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.06) 18%,
-    rgba(255, 255, 255, 0.55) 42%,
-    rgba(255, 255, 255, 0.92) 50%,
-    rgba(255, 255, 255, 0.45) 58%,
-    color-mix(in srgb, var(--shine-accent) 18%, rgba(255, 255, 255, 0.35)) 68%,
+    var(--shine-edge) 18%,
+    var(--shine-mid) 42%,
+    var(--shine-hi) 50%,
+    var(--shine-mid) 58%,
+    color-mix(in srgb, var(--shine-accent) 18%, var(--shine-low)) 68%,
     transparent 88%
   );
   transform: translateX(-170%) skewX(-22deg);
@@ -29,7 +29,7 @@
   z-index: 5;
   opacity: 0;
   filter: blur(0.3px);
-  mix-blend-mode: soft-light;
+  mix-blend-mode: var(--shine-blend);
 }
 
 .rnb-overview-card-shine:hover::after {
