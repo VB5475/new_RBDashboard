@@ -130,6 +130,24 @@ article.submodule-overview.glass-card:hover {
   z-index: 1;
 }
 
+.submodule-overview-header-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.submodule-overview-external-icon {
+  color: var(--card-accent, var(--accent-primary));
+  opacity: 0.85;
+}
+
+a.submodule-overview--clickable:hover .submodule-overview-external-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
 .submodule-overview-title {
   margin: 0;
   flex: 1;

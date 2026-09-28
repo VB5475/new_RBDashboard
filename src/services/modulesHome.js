@@ -56,7 +56,52 @@ function isOverviewEligibleModule(child) {
 
 /** Dashboard-module rows in DSH_OVRVW use GroupCode DSH_MDL and Ref_Sys_MenuCode DSH_MDL_* */
 const DASHBOARD_MODULES_GROUP_CODE = 'DSH_MDL';
+const SSO_GROUP_CODE = 'DSH_SINGLE_SIGN_ON';
 
+/**
+ * Overview catalog uses DSH_MDL_*; sidebar SSO apps use DSH_APP_* (not always 1:1).
+ * Map so overview cards open the same encrypted SSO URL as the sidebar leaf.
+ */
+const OVERVIEW_MDL_TO_SSO_APP_CODE = {
+  DSH_MDL_HR: 'DSH_APP_HR',
+  DSH_MDL_DM: 'DSH_APP_DMS',
+  DSH_MDL_PM: 'DSH_APP_PM',
+  DSH_MDL_FCMMS: 'DSH_APP_PWM',
+  DSH_MDL_CR: 'DSH_APP_CR',
+};
+
+function buildSsoHrefByAppCode(user) {
+  const enc = user?.EncLoginUserID;
+  const map = new Map();
+
+  (user?.UserRights ?? []).forEach((userRight) => {
+    if (norm(userRight.code) !== norm(SSO_GROUP_CODE)) return;
+    (userRight.children || []).forEach((child) => {
+      const code = child.code?.trim();
+      if (!code) return;
+      const nav = createNavObjectFromRights(child, false, enc);
+      if (nav.href) map.set(norm(code), nav.href);
+    });
+  });
+
+  return map;
+}
+
+function resolveSsoHrefForOverviewMenuCode(menuCode, ssoHrefByAppCode) {
+  if (!menuCode || !ssoHrefByAppCode?.size) return null;
+  const key = String(menuCode).trim();
+  const mapped =
+    OVERVIEW_MDL_TO_SSO_APP_CODE[key] ||
+    OVERVIEW_MDL_TO_SSO_APP_CODE[key.toUpperCase()];
+  if (mapped && ssoHrefByAppCode.has(norm(mapped))) {
+    return ssoHrefByAppCode.get(norm(mapped));
+  }
+  const guessed = key.replace(/^DSH_MDL_/i, 'DSH_APP_');
+  if (guessed !== key && ssoHrefByAppCode.has(norm(guessed))) {
+    return ssoHrefByAppCode.get(norm(guessed));
+  }
+  return null;
+}
 function buildUserModuleLookup(user) {
   const groupByCode = new Map();
   const groupByTitle = new Map();
@@ -222,7 +267,6 @@ function mergeLinkGroupsFromRights(user, lookup, groupMap) {
   (user?.UserRights ?? []).forEach((userRight) => {
     const groupCode = userRight.code?.trim();
     if (norm(groupCode) !== norm(IMPORTANT_LINKS_GROUP_CODE)) return;
-
     const meta = lookup.groupByCode.get(norm(groupCode));
     if (!meta) return;
 
@@ -298,6 +342,7 @@ export function compareOverviewFetchEfficiency({
 export async function fetchAllModulesOverview(user) {
   const lookup = buildUserModuleLookup(user);
   const { homeModulesByMenuCode } = lookup;
+  const ssoHrefByAppCode = buildSsoHrefByAppCode(user);
 
   const catalogRows = await fetchOverviewCatalog();
   const cardDefs = catalogRows.filter((row) => norm(row.Ref_ViewType) === 'card');
@@ -319,12 +364,14 @@ export async function fetchAllModulesOverview(user) {
 
     const groupMeta = resolveGroupMeta(row, userMod, lookup);
     const slotKey = `${norm(groupMeta.key)}::${norm(sysMenuCode)}`;
+    const ssoHref = resolveSsoHrefForOverviewMenuCode(sysMenuCode, ssoHrefByAppCode);
 
     if (!moduleSlots.has(slotKey)) {
       moduleSlots.set(slotKey, {
         kind: 'status',
         title: userMod.title,
         path: userMod.openPath ?? userMod.path ?? null,
+        href: ssoHref,
         menuCode: userMod.menuCode,
         cardSections: [],
         loading: true,
@@ -335,6 +382,8 @@ export async function fetchAllModulesOverview(user) {
         groupCode: groupMeta.groupCode,
         _cards: [],
       });
+    } else if (ssoHref && !moduleSlots.get(slotKey).href) {
+      moduleSlots.get(slotKey).href = ssoHref;
     }
 
     const slot = moduleSlots.get(slotKey);
