@@ -1,27 +1,31 @@
-/** Stat colors map to global tokens in index.css (--accent-green, etc.) */
-const STAT_CONFIG = [
-  { key: 'totalUsers', label: 'Total users', tone: 'green' },
-  { key: 'todayActive', label: 'Visits today', tone: 'primary' },
-  { key: 'thisWeekActive', label: 'Visits this week', tone: 'amber' },
-  { key: 'thisMonthActive', label: 'Visits this month', tone: 'secondary' },
-];
+import { USER_ACTIVITY_METRICS } from '../../services/loginAnalytics';
+
+const PLACEHOLDER_METRICS = USER_ACTIVITY_METRICS.map(({ displayLabel, tone }) => ({
+  label: displayLabel,
+  tone,
+}));
 
 export default function LoginTrafficPanel({ stats, loading }) {
+  const metrics = stats?.metrics ?? (loading ? PLACEHOLDER_METRICS : []);
+
   return (
-    <aside className="login-traffic" aria-label="User activity count">
+    <aside className="login-traffic" aria-label="User Activity Count">
       <div className="login-traffic-head">
         <div className="login-traffic-title-row">
           <span className="login-traffic-pulse" aria-hidden />
-          <h2>Live activity</h2>
+          <h2>User Activity Count</h2>
         </div>
-        <p>Platform usage across R&amp;B dashboards</p>
+        <p>Platform Usage Across R&amp;B Dashboards</p>
       </div>
       <div className="login-traffic-grid">
-        {STAT_CONFIG.map(({ key, label, tone }) => (
-          <div key={key} className={`login-traffic-stat login-traffic-stat--${tone}`}>
+        {metrics.map(({ label, value, tone }, index) => (
+          <div
+            key={`${label}-${index}`}
+            className={`login-traffic-stat login-traffic-stat--${tone}`}
+          >
             <span className="login-traffic-stat-label">{label}</span>
             <strong className="login-traffic-stat-value">
-              {loading ? '—' : (stats?.[key] ?? 0).toLocaleString()}
+              {loading ? '—' : (value ?? 0).toLocaleString()}
             </strong>
           </div>
         ))}

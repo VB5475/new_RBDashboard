@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ChevronLeft, LayoutGrid, X } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ChevronLeft, LayoutGrid, RotateCcw, X } from 'lucide-react';
 import toast from 'react-hot-toast';
 import DataGrid from './grid/DataGrid';
 import RnbLoader from './RnbLoader';
@@ -26,6 +26,7 @@ export default function RnbDrilldownModal({
   const [refTable, setRefTable] = useState([]);
   const [drillDownState, setDrillDownState] = useState({});
   const [loading, setLoading] = useState(false);
+  const gridRef = useRef(null);
 
   useEffect(() => {
     if (!open) return;
@@ -146,6 +147,18 @@ export default function RnbDrilldownModal({
           </div>
           <div className="rnb-drilldown-header-actions">
             <span className="rnb-drilldown-level">Level {currentLevel}</span>
+            {canShowGrid ? (
+              <button
+                type="button"
+                className="rnb-drilldown-reset"
+                onClick={() => gridRef.current?.resetAll?.()}
+                disabled={loading}
+                title="Reset all column filters, visibility, groups, and values"
+              >
+                <RotateCcw size={16} aria-hidden />
+                Reset all
+              </button>
+            ) : null}
             {currentLevel > 1 ? (
               <button
                 type="button"
@@ -177,12 +190,14 @@ export default function RnbDrilldownModal({
                 Click a row to drill down to the next level
               </p>
               <DataGrid
+                ref={gridRef}
                 columns={columns}
                 rows={mainTable}
                 plain
                 appearance="dashboard"
                 chrome="modal"
-                enableColumnFilters={false}
+                enableColumnFilters
+                enableSideBar
                 pageSize={100}
                 onRowClick={handleRowClick}
               />

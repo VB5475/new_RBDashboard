@@ -15,9 +15,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 10px 20px;
-  min-height: 56px;
+  gap: 10px;
+  padding: 5px 16px;
+  min-height: 46px;
   background: linear-gradient(
     135deg,
     color-mix(in srgb, var(--accent-primary) 6%, #fff) 0%,
@@ -45,8 +45,8 @@
 
 .rnb-page-header-menu {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border: 1px solid color-mix(in srgb, var(--accent-primary) 20%, var(--border-light));
   border-radius: var(--radius-sm);
   background: var(--glass-bg);
@@ -67,7 +67,7 @@
 .rnb-page-header-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
   flex: 1;
   flex-wrap: wrap;
@@ -76,24 +76,23 @@
 .rnb-header-dept {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   flex-shrink: 0;
-  padding-right: 14px;
-  margin-right: 2px;
+  padding-right: 12px;
   border-right: 2px solid color-mix(in srgb, var(--text-muted) 25%, transparent);
 }
 
 .rnb-page-header-emblem {
   flex-shrink: 0;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
   border-radius: 4px;
   filter: drop-shadow(0 1px 2px rgba(15, 23, 42, 0.08));
 }
 
 .rnb-header-dept-name {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--text-secondary);
@@ -139,9 +138,9 @@
 }
 
 .rnb-header-crumb-current {
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--accent-primary);
   background: var(--accent-primary-dim);
@@ -156,23 +155,31 @@
 .rnb-header-mother-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
-  padding: 6px 12px;
+  height: 32px;
+  padding: 0 10px 0 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.28);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .rnb-header-mother-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.34);
+}
+
+.rnb-header-mother-btn:focus-visible {
+  outline: 2px solid #dc2626;
+  outline-offset: 2px;
 }
 
 .rnb-header-mother-icon {
@@ -196,8 +203,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   padding: 0;
   border-radius: var(--radius-sm);
   border: 1px solid color-mix(in srgb, var(--accent-primary) 18%, var(--border-light));
@@ -256,7 +263,7 @@
 @media (max-width: 900px) {
   .rnb-page-header-bar {
     flex-wrap: wrap;
-    padding: 10px 14px;
+    padding: 5px 12px;
   }
 
   .rnb-header-dept-name--full {

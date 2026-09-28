@@ -41,6 +41,7 @@
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
+  padding: 10px 12px 12px;
 }
 
 .rnb-main > .rnb-home-page--chart-click {

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { navIcon } from '../navigation/buildNav';
 import RnbStatCard from './RnbStatCard';
 import RnbLoader from './RnbLoader';
 import './SubmoduleOverviewCard.css';
@@ -10,7 +9,7 @@ function isTotalRow(row) {
 }
 
 export default function SubmoduleOverviewCard({ module, delay = 0, accent }) {
-  const { title, path, cardSections, loading, error, menuCode } = module;
+  const { title, path, cardSections, loading, error } = module;
   const cardStyle = {
     animationDelay: `${delay}ms`,
     ...(accent ? { '--card-accent': accent } : {}),
@@ -25,14 +24,7 @@ export default function SubmoduleOverviewCard({ module, delay = 0, accent }) {
   const body = (
     <>
       <header className="submodule-overview-header">
-        <div className="submodule-overview-header-main">
-          {menuCode ? (
-            <span className="submodule-overview-icon-badge" aria-hidden>
-              {navIcon(menuCode, false, 20)}
-            </span>
-          ) : null}
-          <h3 className="submodule-overview-title">{title}</h3>
-        </div>
+        <h3 className="submodule-overview-title">{title}</h3>
         {!loading && !error && statusRows.length > 0 && (
           <span className="submodule-overview-count">{statusRows.length}</span>
         )}

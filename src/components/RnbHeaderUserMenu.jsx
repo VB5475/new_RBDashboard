@@ -51,7 +51,7 @@ export default function RnbHeaderUserMenu() {
         aria-haspopup="menu"
       >
         <span className="rnb-header-user-avatar" aria-hidden>
-          <UserCircle2 size={22} />
+          <UserCircle2 size={18} />
         </span>
         <span className="rnb-header-user-text">
           <span className="rnb-header-user-id">{loginId}</span>

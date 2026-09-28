@@ -11,10 +11,10 @@
 .rnb-chart-click-header {
   flex-shrink: 0;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 16px 20px;
+  gap: 12px;
+  padding: 8px 14px;
   border-bottom: 1px solid var(--border-subtle);
   background: linear-gradient(
     180deg,
@@ -25,32 +25,66 @@
 
 .rnb-chart-click-heading h2 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
+  line-height: 1.25;
 }
 
 .rnb-chart-click-heading p {
-  margin: 6px 0 0;
-  font-size: 12px;
+  margin: 1px 0 0;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-muted);
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: 0.04em;
+}
+
+.rnb-chart-click-header-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.rnb-chart-click-reset {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 5px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 35%, var(--border-light));
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--accent-primary);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.rnb-chart-click-reset:hover {
+  background: var(--accent-primary-dim, rgba(2, 132, 199, 0.12));
+  border-color: var(--accent-primary);
 }
 
 .rnb-chart-click-back {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
+  flex-shrink: 0;
+  gap: 4px;
+  height: 30px;
+  padding: 0 12px 0 8px;
   border: none;
   border-radius: var(--radius-sm);
   background: var(--accent-primary);
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+  box-shadow: var(--shadow-glow);
 }
 
 .rnb-chart-click-back:hover {
@@ -61,10 +95,22 @@
   flex: 1;
   min-height: 0;
   min-width: 0;
-  padding: 16px 20px 24px;
+  padding: 8px 10px 10px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+.rnb-chart-click-body .data-grid-wrapper--dashboard .data-grid-th-inner {
+  padding: 7px 10px;
+}
+
+.rnb-chart-click-body .data-grid-wrapper--dashboard .data-grid-table td {
+  padding: 5px 10px;
+}
+
+.rnb-chart-click-body .data-grid-wrapper--modal-chrome .data-grid-footer {
+  padding: 5px 10px 6px;
 }
 
 .rnb-chart-click-body .data-grid-wrapper--dashboard {
@@ -90,6 +136,7 @@
   flex: 1;
   min-height: 0;
   min-width: 0;
+  /* Let flex sizing own height; sticky needs this element as the scrollport */
   max-height: none;
 }
 
@@ -101,8 +148,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 52px;
-  padding: 5px 10px;
+  min-width: 48px;
+  padding: 3px 9px;
   border: none;
   border-radius: 6px;
   background: #1976d2;

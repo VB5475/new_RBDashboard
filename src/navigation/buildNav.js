@@ -14,6 +14,7 @@ import {
 import { createElement } from 'react';
 import { WEB_DOMAIN } from '../config/api.config';
 import { ALL_MODULES_LABEL, isOverviewRoutePath } from '../constants/routes';
+import { toTitleCase } from '../utils/displayText';
 
 const ICON_SIZE = 22;
 
@@ -54,7 +55,7 @@ export function createNavObjectFromRights(child, forSearch, encLoginUserID) {
 
   const item = {
     type: 'item',
-    name: child.menutitle?.trim() || child.formtitle?.trim(),
+    name: toTitleCase(child.menutitle?.trim() || child.formtitle?.trim()),
     code: child.code?.trim(),
     icon: forSearch ? navIcon(null, true) : null,
   };
@@ -109,7 +110,7 @@ export function buildNavigation(userData) {
 
     sections.push({
       type: 'group',
-      name: userRight.menutitle?.trim(),
+      name: toTitleCase(userRight.menutitle?.trim()),
       code: userRight.code?.trim(),
       icon: navIcon(userRight.code),
       items: children

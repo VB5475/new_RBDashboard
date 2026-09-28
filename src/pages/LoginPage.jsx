@@ -126,15 +126,15 @@ export default function LoginPage() {
             />
           </div>
           <div className="login-topbar-titles">
-            <p className="login-topbar-eyebrow">Government of Gujarat</p>
-            <h1 className="login-topbar-title">Roads &amp; Buildings Department</h1>
-            <p className="login-topbar-tagline">Integrated dashboard &amp; analytics portal</p>
+            <p className="login-topbar-eyebrow">Government Of Gujarat</p>
+            <h1 className="login-topbar-title">Roads And Buildings Department</h1>
+            <p className="login-topbar-tagline">Integrated Dashboard And Analytics Portal</p>
           </div>
         </div>
         {MOBILEAPP_LINK ? (
           <button type="button" className="login-app-cta" onClick={() => setQrOpen(true)}>
             <Download size={18} />
-            <span>Download RNB mobile app</span>
+            <span>Download RNB Mobile App</span>
           </button>
         ) : null}
       </header>
@@ -152,26 +152,24 @@ export default function LoginPage() {
           ) : (
             <div className="login-hero-tagline" aria-hidden>
               <ShieldCheck size={28} />
-              <p>Unified analytics for roads, bridges, and infrastructure programs.</p>
+              <p>Unified Analytics For Roads, Bridges, And Infrastructure Programs.</p>
             </div>
           )}
 
           <form className="login-panel" onSubmit={handleSubmit}>
-            <div className="login-panel-head">
-              <img src={LOGIN_ASSETS.roadGif} alt="" className="login-panel-mark" />
-              <div>
-                <h1>RNB Dashboard</h1>
-                <p className="login-panel-sub">Secure department login</p>
+            <header className="login-panel-header">
+              <div className="login-panel-badge">
+                <img src={LOGIN_ASSETS.roadGif} alt="" className="login-panel-mark" />
               </div>
-            </div>
+              <div className="login-panel-heading">
+                <p className="login-panel-dept">Roads And Buildings Department</p>
+                <h1 className="login-panel-title">Welcome Dashboard Login</h1>
+              </div>
+            </header>
 
-            <div className="login-welcome">
-              <span>Welcome back</span>
-              <small>Enter your credentials to continue</small>
-            </div>
-
+            <div className="login-panel-body">
             <label className="login-field">
-              <span>User ID</span>
+              <span>User Id</span>
               <input
                 value={loginID}
                 onChange={(e) => setLoginID(e.target.value)}
@@ -218,7 +216,7 @@ export default function LoginPage() {
                 <input
                   value={captchaInput}
                   onChange={(e) => setCaptchaInput(e.target.value)}
-                  placeholder="Enter code"
+                  placeholder="Enter Code"
                   autoComplete="off"
                   required
                 />
@@ -226,30 +224,31 @@ export default function LoginPage() {
             </div>
 
             <button type="submit" className="login-submit" disabled={submitting}>
-              {submitting ? 'Signing in…' : 'Sign in to dashboard'}
+              {submitting ? 'Logging In…' : 'Login'}
             </button>
 
             <div className="login-links">
-              <Link to="/forgotpassword">Forgot password?</Link>
+              <Link to="/forgotpassword">Forgot Password?</Link>
               {USERMANUAL_URL ? (
                 <a href={USERMANUAL_URL} target="_blank" rel="noopener noreferrer">
-                  User manual
+                  User Manual
                 </a>
               ) : null}
+            </div>
             </div>
           </form>
         </div>
         <p className="login-hero-scroll-hint" aria-hidden>
-          Scroll for featured works &amp; linked applications
+          Scroll For Featured Works And Linked Applications
         </p>
       </section>
 
       <section className="login-showcase" id="login-showcase">
         <header className="login-section-head">
-          <span className="login-section-eyebrow">State infrastructure</span>
-          <h2 className="login-section-title">Featured works across Gujarat</h2>
+          <span className="login-section-eyebrow">State Infrastructure</span>
+          <h2 className="login-section-title">Featured Works Across Gujarat</h2>
           <p className="login-section-lead">
-            Roads, bridges, and public assets monitored under the R&amp;B portfolio.
+            Roads, Bridges, And Public Assets Monitored Under The R&amp;B Portfolio.
           </p>
         </header>
         <LoginCarousel
@@ -261,9 +260,9 @@ export default function LoginPage() {
       <section className="login-ecosystem" id="login-ecosystem">
         <header className="login-section-head login-section-head--compact">
           <span className="login-section-eyebrow">Ecosystem</span>
-          <h2 className="login-section-title">Other R&amp;B applications</h2>
+          <h2 className="login-section-title">Other R&amp;B Applications</h2>
           <p className="login-section-lead">
-            Quick access to linked departmental systems and monitoring tools.
+            Quick Access To Linked Departmental Systems And Monitoring Tools.
           </p>
         </header>
         <LoginDepartmentGrid departments={departments} />

@@ -20,13 +20,13 @@ export default function LoginQrModal({ open, onClose }) {
           </button>
         </header>
         <p className="login-modal-lead">
-          Scan with your phone camera or Google Lens to download the official mobile app.
+          Scan With Your Phone Camera Or Google Lens To Download The Official Mobile App.
         </p>
         <div className="login-qr-wrap">
           {MOBILEAPP_LINK ? (
             <QRCodeSVG value={MOBILEAPP_LINK} size={220} level="H" includeMargin />
           ) : (
-            <p>App link not configured.</p>
+            <p>App Link Not Configured.</p>
           )}
         </div>
         {MOBILEAPP_LINK ? (
@@ -37,7 +37,7 @@ export default function LoginQrModal({ open, onClose }) {
             rel="noopener noreferrer"
           >
             <Download size={18} />
-            Open download link
+            Open Download Link
           </a>
         ) : null}
       </div>

@@ -7,6 +7,7 @@ import {
 import { getUserToken } from '../utils/session';
 import { fetchObjectDataset } from './dashboard';
 import { createNavObjectFromRights } from '../navigation/buildNav';
+import { toTitleCase } from '../utils/displayText';
 
 /** Single catalog call for the Dashboard Overview page (DSH_OVRVW). */
 export const ALL_MODULES_OVERVIEW_MENU_CODE = 'DSH_OVRVW';
@@ -88,7 +89,7 @@ function buildUserModuleLookup(user) {
       const path = childPath(child);
 
       homeModulesByMenuCode.set(menuCode, {
-        title: child.menutitle?.trim() || child.formtitle?.trim() || path,
+        title: toTitleCase(child.menutitle?.trim() || child.formtitle?.trim() || path),
         path,
         menuCode,
         groupName,

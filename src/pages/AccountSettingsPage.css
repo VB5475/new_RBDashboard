@@ -77,7 +77,7 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--text-secondary);
 }
 
@@ -182,7 +182,7 @@
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--accent-primary);
   padding-bottom: 8px;
   border-bottom: 2px solid var(--accent-primary-dim);

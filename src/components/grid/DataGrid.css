@@ -93,8 +93,9 @@
 .data-grid-wrapper--modal-chrome .data-grid-scroll {
   flex: 0 1 auto;
   min-height: 0;
-  max-height: none;
-  overflow: visible;
+  /* Keep a scrollport so sticky header/filter stay inside the grid, not the page */
+  overflow: auto;
+  max-height: min(60vh, 560px);
 }
 
 .data-grid-wrapper--modal-chrome .data-grid-footer {
@@ -209,9 +210,63 @@
   background: var(--grid-accent-dim);
 }
 
+/* Grid + side bar row */
+.data-grid-body {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+.data-grid-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+
 .data-grid-scroll {
   overflow: auto;
   max-height: min(520px, 60vh);
+}
+
+/* Row group headers (Columns tool panel grouping) */
+.data-grid-table tbody tr.data-grid-group-row,
+.data-grid-table tbody tr.data-grid-group-row:hover {
+  background: color-mix(in srgb, var(--grid-chrome) 9%, #fff);
+}
+
+.data-grid-table tbody tr.data-grid-group-row td {
+  font-weight: 700;
+  color: var(--grid-chrome);
+  border-bottom: 1px solid color-mix(in srgb, var(--grid-chrome) 20%, transparent);
+}
+
+.data-grid-group-cell {
+  white-space: nowrap;
+}
+
+.data-grid-group-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.data-grid-group-count {
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.data-grid-table tbody tr.data-grid-leaf-row td:first-child {
+  padding-left: 28px;
 }
 
 .data-grid-table {
@@ -233,7 +288,7 @@
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
+  text-transform: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   cursor: pointer;
   user-select: none;
@@ -250,12 +305,14 @@
 
 .data-grid-filter-row th {
   position: sticky;
-  top: 40px;
+  /* Synced to real header height via --data-grid-head-height on .data-grid-scroll */
+  top: var(--data-grid-head-height, 2.5rem);
   z-index: 2;
   background: #f1f5f9;
   padding: 6px 8px;
   border-bottom: 1px solid var(--border-subtle);
   vertical-align: middle;
+  box-shadow: 0 1px 0 var(--border-subtle);
 }
 
 .data-grid-filter-cell {
@@ -263,37 +320,117 @@
   max-width: 220px;
 }
 
-.data-grid-col-filter {
-  width: 100%;
-  max-width: 100%;
-  padding: 6px 28px 6px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--border-light);
-  background: #fff;
+.data-grid-filter-bar {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--grid-accent-dim) 85%, #fff) 0%,
+    var(--grid-accent-dim) 100%
+  );
+  border-bottom: 0 solid transparent;
+  transition:
+    grid-template-rows 0.28s ease,
+    opacity 0.22s ease,
+    border-bottom-color 0.22s ease;
+  pointer-events: none;
+}
+
+.data-grid-filter-bar.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  border-bottom: 1px solid var(--border-subtle);
+  pointer-events: auto;
+}
+
+.data-grid-filter-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 0;
+  padding: 0 12px;
+  transform: translateY(-4px);
+  transition:
+    padding 0.28s ease,
+    transform 0.28s ease;
+}
+
+.data-grid-filter-bar.is-open .data-grid-filter-bar-inner {
+  padding: 6px 12px;
+  transform: translateY(0);
+}
+
+.data-grid-filter-bar-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.data-grid-filter-bar-text {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-primary);
-  cursor: pointer;
-  appearance: none;
-  background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
-    linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
-  background-position:
-    calc(100% - 14px) calc(50% - 2px),
-    calc(100% - 9px) calc(50% - 2px);
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
-}
-
-.data-grid-col-filter.is-active {
-  border-color: var(--grid-chrome);
-  background-color: var(--grid-accent-dim);
   color: var(--grid-chrome);
+  white-space: nowrap;
 }
 
-.data-grid-col-filter:focus {
-  outline: none;
+.data-grid-filter-bar-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.data-grid-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 180px;
+  padding: 3px 7px;
+  border: 1px solid color-mix(in srgb, var(--grid-chrome) 28%, var(--border-light));
+  border-radius: 999px;
+  background: #fff;
+  color: var(--grid-chrome);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.data-grid-filter-chip:hover {
+  background: color-mix(in srgb, var(--grid-accent-dim) 70%, #fff);
   border-color: var(--grid-chrome);
-  box-shadow: 0 0 0 2px var(--grid-accent-dim);
+}
+
+.data-grid-filter-chip-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.data-grid-filter-chip-count {
+  flex-shrink: 0;
+  min-width: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--grid-accent-dim);
+  font-size: 10px;
+  line-height: 16px;
+  text-align: center;
+}
+
+.data-grid-clear-filters--compact {
+  padding: 4px 9px;
+  font-size: 11px;
+  flex-shrink: 0;
 }
 
 .data-grid-filter-na {

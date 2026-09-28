@@ -88,7 +88,7 @@ export default function RnbHeader({
             onClick={onMenuToggle}
             aria-label={sidebarExpanded ? 'Close menu' : 'Open menu'}
           >
-            <Menu size={22} />
+            <Menu size={20} />
           </button>
         ) : null}
 
@@ -98,8 +98,8 @@ export default function RnbHeader({
               src={EMBLEM_SRC}
               alt=""
               className="rnb-page-header-emblem"
-              width={34}
-              height={34}
+              width={30}
+              height={30}
               loading="lazy"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
@@ -130,7 +130,7 @@ export default function RnbHeader({
                 </span>
                 <span className="rnb-header-mother-label-short">Mother Login</span>
               </span>
-              <Coins size={18} className="rnb-header-mother-icon" aria-hidden />
+              <Coins size={15} className="rnb-header-mother-icon" aria-hidden />
             </button>
           ) : null}
         </div>

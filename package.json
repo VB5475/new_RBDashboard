@@ -7,6 +7,7 @@
   "dev": "node vite.cjs",
   "build": "vite build",
   "lint": "eslint .",
+  "smoke:grid": "node scripts/grid-utils.smoke.mjs",
   "preview": "vite preview"
  },
  "dependencies": {

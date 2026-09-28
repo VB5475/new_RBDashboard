@@ -1,5 +1,5 @@
-import { useMemo, useState } from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { useMemo, useRef, useState } from 'react';
+import { ChevronLeft, RotateCcw } from 'lucide-react';
 import DataGrid from './grid/DataGrid';
 import RnbWorkMapModal from './RnbWorkMapModal';
 import { columnsForChartClick } from '../utils/chartClickMap';
@@ -13,6 +13,7 @@ export default function RnbChartClickPanel({
   onBack,
 }) {
   const [mapTarget, setMapTarget] = useState(null);
+  const gridRef = useRef(null);
 
   const columns = useMemo(
     () => columnsForChartClick(rows, menuCode, setMapTarget),
@@ -26,20 +27,33 @@ export default function RnbChartClickPanel({
           <h2>{title}</h2>
           {subtitle ? <p>{subtitle}</p> : null}
         </div>
-        <button type="button" className="rnb-chart-click-back" onClick={onBack}>
-          <ChevronLeft size={18} aria-hidden />
-          Back
-        </button>
+        <div className="rnb-chart-click-header-actions">
+          <button
+            type="button"
+            className="rnb-chart-click-reset"
+            onClick={() => gridRef.current?.resetAll?.()}
+            title="Reset all column filters, visibility, groups, and values"
+          >
+            <RotateCcw size={14} aria-hidden />
+            Reset all
+          </button>
+          <button type="button" className="rnb-chart-click-back" onClick={onBack}>
+            <ChevronLeft size={16} aria-hidden />
+            Back
+          </button>
+        </div>
       </header>
 
       <div className="rnb-chart-click-body">
         <DataGrid
+          ref={gridRef}
           columns={columns}
           rows={rows}
           plain
           appearance="dashboard"
           chrome="modal"
-          enableColumnFilters={false}
+          enableColumnFilters
+          enableSideBar
           pageSize={100}
         />
       </div>
