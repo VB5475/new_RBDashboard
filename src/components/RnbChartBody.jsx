@@ -91,9 +91,27 @@ function handleChartAreaClick(onChartClick, state) {
 
   const series = state.activePayload?.[0]?.dataKey ?? '';
 
+
   onChartClick(String(state.activeLabel).trim(), String(series).trim());
 
 }
+
+/** Match R-BDashboard: single series -> ClickedValue2 ""; multi -> dataset label. */
+function handleSeriesShapeClick(onChartClick, seriesCount, dataKey, barData) {
+
+  if (!onChartClick) return;
+
+  const label = String(barData?.payload?.label ?? '').trim();
+
+  if (!label) return;
+
+  const seriesLabel = seriesCount > 1 ? String(dataKey ?? '').trim() : '';
+
+
+  onChartClick(label, seriesLabel);
+
+}
+
 
 
 
@@ -619,8 +637,6 @@ export default function RnbChartBody({
 
       barGap={barMetrics?.barGap}
 
-      onClick={(state) => handleChartAreaClick(onChartClick, state)}
-
     >
 
       <CartesianGrid strokeDasharray="3 3" stroke={chartTheme.grid} vertical={false} />
@@ -684,6 +700,10 @@ export default function RnbChartBody({
 
           radius={[3, 3, 0, 0]}
 
+          cursor={onChartClick ? 'pointer' : undefined}
+
+          onClick={(barData) => handleSeriesShapeClick(onChartClick, seriesCount, key, barData)}
+
         >
 
           {showBarValueLabels ? <LabelList dataKey={key} {...labelListProps} /> : null}
@@ -707,8 +727,6 @@ export default function RnbChartBody({
       data={data}
 
       margin={chartMargin}
-
-      onClick={(state) => handleChartAreaClick(onChartClick, state)}
 
     >
 
@@ -773,6 +791,10 @@ export default function RnbChartBody({
           strokeWidth={2}
 
           dot={{ r: 3, fill: stroke, stroke }}
+
+          cursor={onChartClick ? 'pointer' : undefined}
+
+          onClick={(pointData) => handleSeriesShapeClick(onChartClick, seriesCount, key, pointData)}
 
         >
 

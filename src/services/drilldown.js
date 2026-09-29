@@ -22,6 +22,7 @@ export async function fetchChartClickRows({
     LoginID: loginId,
   });
 
+
   const response = await axios.get(`${WS_DASH_URL}/${CHART_CLICK}?${params}`, {
     headers: BASIC_TOKEN_HEADER,
   });

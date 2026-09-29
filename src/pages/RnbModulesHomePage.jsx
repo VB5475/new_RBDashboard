@@ -1,18 +1,26 @@
+import { useCallback, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 import { groupAccentColor, navIcon } from '../navigation/buildNav';
 import { resolveGroupAccent } from '../theme/overviewColors';
 import SubmoduleOverviewCard from '../components/SubmoduleOverviewCard';
 import LinkOverviewCard from '../components/LinkOverviewCard';
+import RnbChartClickModal from '../components/RnbChartClickModal';
 import { useUser } from '../context/UserContext';
 import {
   fetchAllModulesOverview,
   isImportantLinksGroup,
 } from '../services/modulesHome';
+import { createFilterSession } from '../services/dashboard';
+import { fetchChartClickRows } from '../services/drilldown';
+import { getUserToken } from '../utils/session';
 import RnbLoader from '../components/RnbLoader';
 import './RnbModulesHomePage.css';
 
 export default function RnbModulesHomePage() {
   const { user } = useUser();
+  const [chartClick, setChartClick] = useState(null);
+  const [chartClickLoading, setChartClickLoading] = useState(false);
 
   const { data: groups, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['rnb-modules-home', user?.UserID],
@@ -20,6 +28,56 @@ export default function RnbModulesHomePage() {
     enabled: Boolean(user?.UserRights?.length),
     staleTime: 5 * 60 * 1000,
   });
+
+  const handleStatusClick = useCallback(async ({ label, objectId, sectionTitle, module }) => {
+    if (!label || objectId == null || !module?.menuCode) return;
+
+    setChartClickLoading(true);
+    setChartClick({
+      open: true,
+      menuCode: module.menuCode,
+      title: sectionTitle || module.title,
+      subtitle: label,
+      rows: [],
+    });
+
+    try {
+      const sessionId = await createFilterSession(objectId);
+      const rows = await fetchChartClickRows({
+        menuCode: module.menuCode,
+        sessionId: sessionId ?? '',
+        objectId,
+        filterString: '',
+        clickedValue1: label,
+        clickedValue2: '',
+        loginId: getUserToken(),
+      });
+
+      if (!rows?.length) {
+        toast.error('No data available');
+        setChartClick(null);
+        return;
+      }
+
+      setChartClick({
+        open: true,
+        menuCode: module.menuCode,
+        title: sectionTitle || module.title,
+        subtitle: label,
+        rows,
+      });
+    } catch (err) {
+      toast.error(err?.message || 'Failed to load grid');
+      setChartClick(null);
+    } finally {
+      setChartClickLoading(false);
+    }
+  }, []);
+
+  const closeChartClick = useCallback(() => {
+    setChartClick(null);
+    setChartClickLoading(false);
+  }, []);
 
   if (isLoading) {
     return (
@@ -101,6 +159,8 @@ export default function RnbModulesHomePage() {
                     module={mod}
                     delay={delay}
                     accent={accent}
+                    onStatusClick={handleStatusClick}
+                    statusClickLoading={chartClickLoading}
                   />
                 );
               })}
@@ -108,6 +168,16 @@ export default function RnbModulesHomePage() {
           </section>
         );
       })}
+
+      <RnbChartClickModal
+        open={Boolean(chartClick?.open)}
+        menuCode={chartClick?.menuCode}
+        title={chartClick?.title}
+        subtitle={chartClick?.subtitle}
+        rows={chartClick?.rows}
+        loading={chartClickLoading}
+        onClose={closeChartClick}
+      />
     </div>
   );
 }

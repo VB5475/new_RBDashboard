@@ -1,10 +1,9 @@
 import { ALL_MODULES_LABEL, isOverviewRoutePath } from '../constants/routes';
-import { toTitleCase } from './displayText';
 
 export function getPageHeading(userRights, pathname) {
   if (isOverviewRoutePath(pathname)) {
     return {
-      parentTitle: toTitleCase(ALL_MODULES_LABEL),
+      parentTitle: ALL_MODULES_LABEL,
       childTitle: null,
     };
   }
@@ -16,16 +15,16 @@ export function getPageHeading(userRights, pathname) {
     });
     if (child) {
       return {
-        parentTitle: toTitleCase(
+        parentTitle:
           group.formtitle?.trim() ||
-            group.menutitle?.trim() ||
-            group.menucode?.trim(),
-        ),
-        childTitle: toTitleCase(
+          group.menutitle?.trim() ||
+          group.menucode?.trim() ||
+          null,
+        childTitle:
           child.formtitle?.trim() ||
-            child.menutitle?.trim() ||
-            child.menucode?.trim(),
-        ),
+          child.menutitle?.trim() ||
+          child.menucode?.trim() ||
+          null,
       };
     }
   }

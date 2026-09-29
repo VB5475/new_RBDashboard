@@ -5,6 +5,17 @@ import RnbWorkMapModal from './RnbWorkMapModal';
 import { columnsForChartClick } from '../utils/chartClickMap';
 import './RnbChartClickPanel.css';
 
+/** Comfortable per-column width + chrome (side rail, padding, footer). */
+const COL_WIDTH_PX = 200;
+const GRID_CHROME_PX = 96;
+/** Keep header/actions readable even with few columns. */
+const PANEL_MIN_PX = 640;
+
+export function chartClickPanelWidthPx(columnCount) {
+  const n = Math.max(1, Number(columnCount) || 1);
+  return Math.max(PANEL_MIN_PX, n * COL_WIDTH_PX + GRID_CHROME_PX);
+}
+
 export default function RnbChartClickPanel({
   menuCode,
   title,
@@ -20,12 +31,17 @@ export default function RnbChartClickPanel({
     [rows, menuCode],
   );
 
+  const panelWidthPx = chartClickPanelWidthPx(columns.length);
+
   return (
-    <section className="rnb-chart-click-panel glass-card">
+    <section
+      className="rnb-chart-click-panel glass-card"
+      style={{ '--chart-click-panel-width': `${panelWidthPx}px` }}
+    >
       <header className="rnb-chart-click-header">
         <div className="rnb-chart-click-heading">
-          <h2>{title}</h2>
-          {subtitle ? <p>{subtitle}</p> : null}
+          <h2 title={title}>{title}</h2>
+          {subtitle ? <p title={subtitle}>{subtitle}</p> : null}
         </div>
         <div className="rnb-chart-click-header-actions">
           <button

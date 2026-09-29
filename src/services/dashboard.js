@@ -73,7 +73,7 @@ export function chartDatasetsFromTable(tablePayload, chartType) {
   return { labels, datasets };
 }
 
-async function createFilterSession(objectId) {
+export async function createFilterSession(objectId) {
   const params = new URLSearchParams({
     ObjectID: objectId,
     LoginID: getUserToken(),
