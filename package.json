@@ -21,12 +21,12 @@
   "qrcode.react": "^4.2.0",
   "react": "^19.2.4",
   "react-dom": "^19.2.4",
-  "react-hot-toast": "^2.6.1",
   "react-is": "^19.2.5",
   "react-leaflet": "^5.0.0",
   "react-router-dom": "^7.14.1",
   "react-simple-captcha": "^9.3.1",
-  "recharts": "^3.8.1"
+  "recharts": "^3.8.1",
+  "sonner": "^2.0.8"
  },
  "devDependencies": {
   "@eslint/js": "^9.39.4",

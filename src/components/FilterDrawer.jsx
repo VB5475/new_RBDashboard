@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { Check, Filter, RotateCcw, X } from 'lucide-react';
 import {
   applyWidgetFilters,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useUser } from '../context/UserContext';
 import { fetchGrievanceModules, registerGrievance } from '../services/grievance';
 import './RnbModal.css';

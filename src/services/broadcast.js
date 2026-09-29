@@ -1,5 +1,5 @@
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { DASHBOARD_URL, BASIC_TOKEN_HEADER, BROADCAST_MSG_FETCH } from '../config/api.config';
 import { getUserToken, globalLogout } from '../utils/session';
 

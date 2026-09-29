@@ -444,6 +444,14 @@ html[data-theme='dark'] .login-traffic-stat {
   color: var(--accent-primary);
 }
 
+html[data-theme='dark'] .login-panel-dept {
+  color: var(--text-primary);
+}
+
+html[data-theme='dark'] .login-panel-title {
+  color: color-mix(in srgb, var(--accent-primary) 72%, #ffffff 28%);
+}
+
 .login-panel-body {
   padding: 20px 20px 18px;
 }

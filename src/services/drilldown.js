@@ -1,5 +1,5 @@
 import axios from 'axios';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { WS_DASH_URL, BASIC_TOKEN_HEADER, CHART_CLICK, DATA_DRILL_DOWN } from '../config/api.config';
 
 export async function fetchChartClickRows({

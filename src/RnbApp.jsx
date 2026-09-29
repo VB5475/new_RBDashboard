@@ -1,22 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster } from 'react-hot-toast';
 import { UserProvider, useUser } from './context/UserContext';
 import { restoreSessionFromStorage } from './services/auth';
 import { isAuthenticated } from './utils/session';
 import RequireAuth from './routes/RequireAuth';
 import RnbDashboardLayout from './layout/RnbDashboardLayout';
-import LoginPage from './pages/LoginPage';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
-import ChangePasswordPage from './pages/ChangePasswordPage';
-import UpdateUserDetailsPage from './pages/UpdateUserDetailsPage';
 import RnbLoader from './components/RnbLoader';
-import RnbHomePage from './pages/RnbHomePage';
-import RnbModulesHomePage from './pages/RnbModulesHomePage';
-import DataViewPage from './pages/DataViewPage';
-import DirectReportPage from './pages/DirectReportPage';
-import WelcomePage, { dismissWelcome, isWelcomeDismissed } from './pages/WelcomePage';
+import AppToaster from './components/AppToaster';
+import {
+  LoginPage,
+  ForgotPasswordPage,
+  ChangePasswordPage,
+  UpdateUserDetailsPage,
+  RnbHomePage,
+  RnbModulesHomePage,
+  DataViewPage,
+  DirectReportPage,
+  WelcomePage,
+  LazyRoute,
+} from './routes/lazyPages';
+import { dismissWelcome, isWelcomeDismissed } from './pages/welcomeSession';
 import {
   canAccessOverview,
   overviewPathsToRegister,
@@ -76,25 +80,27 @@ function DynamicRoutes() {
   const defaultHome = pickDefaultLandingPath(allowedRoutes);
 
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
-      <Route
-        element={
-          <RequireAuth>
-            <RnbDashboardLayout />
-          </RequireAuth>
-        }
-      >
-        {overviewRoutes}
-        {routeElements}
-        <Route path="/changepassword" element={<ChangePasswordPage />} />
-        <Route path="/updateuserdetails" element={<UpdateUserDetailsPage />} />
-        <Route index element={<Navigate to={defaultHome} replace />} />
-        <Route path="*" element={<Navigate to={defaultHome} replace />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/login" replace />} />
-    </Routes>
+    <LazyRoute message="Loading page…">
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+        <Route
+          element={
+            <RequireAuth>
+              <RnbDashboardLayout />
+            </RequireAuth>
+          }
+        >
+          {overviewRoutes}
+          {routeElements}
+          <Route path="/changepassword" element={<ChangePasswordPage />} />
+          <Route path="/updateuserdetails" element={<UpdateUserDetailsPage />} />
+          <Route index element={<Navigate to={defaultHome} replace />} />
+          <Route path="*" element={<Navigate to={defaultHome} replace />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    </LazyRoute>
   );
 }
 
@@ -112,12 +118,18 @@ function WelcomeGate({ children }) {
 
   if (showWelcome) {
     return (
-      <WelcomePage
-        onContinue={() => {
-          dismissWelcome();
-          setShowWelcome(false);
-        }}
-      />
+      <Suspense
+        fallback={
+          <RnbLoader variant="fullscreen" message="Loading welcome…" />
+        }
+      >
+        <WelcomePage
+          onContinue={() => {
+            dismissWelcome();
+            setShowWelcome(false);
+          }}
+        />
+      </Suspense>
     );
   }
 
@@ -154,19 +166,9 @@ function SessionBootstrap({ children }) {
 export default function RnbApp() {
   return (
     <QueryClientProvider client={queryClient}>
+      <AppToaster />
       <SessionBootstrap>
         <WelcomeGate>
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              style: {
-                background: 'var(--bg-elevated)',
-                color: 'var(--text-primary)',
-                border: '1px solid var(--border-light)',
-                boxShadow: 'var(--shadow-lg)',
-              },
-            }}
-          />
           <DynamicRoutes />
         </WelcomeGate>
       </SessionBootstrap>

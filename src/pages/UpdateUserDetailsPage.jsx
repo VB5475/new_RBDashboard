@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Home, UserCircle2 } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useUser } from '../context/UserContext';
 import AccountSettingsShell from '../components/AccountSettingsShell';
 import AccountConfirmDialog from '../components/AccountConfirmDialog';

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplateNoReload,
@@ -28,14 +28,16 @@ import {
 } from '../config/api.config';
 import LoginCarousel from './login/LoginCarousel';
 import LoginDepartmentGrid from './login/LoginDepartmentGrid';
-import LoginQrModal from './login/LoginQrModal';
 import LoginTrafficPanel from './login/LoginTrafficPanel';
 import {
   getLoginDepartments,
   LOGIN_ASSETS,
   LOGIN_CAROUSEL,
 } from './login/loginDepartments';
+import { lazyModal } from '../utils/lazyModal';
 import './LoginPage.css';
+
+const LoginQrModal = lazyModal(() => import('./login/LoginQrModal'));
 
 export default function LoginPage() {
   const [loginID, setLoginID] = useState('');

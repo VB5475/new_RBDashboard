@@ -1,7 +1,7 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, Suspense, lazy } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { activeTabCodeFromPath } from '../utils/activeTabCode';
 import {
   fetchHomeWidgets,
@@ -17,13 +17,15 @@ import {
 import { getUserToken } from '../utils/session';
 import RnbStatusSection from '../components/RnbStatusSection';
 import RnbChartPanel from '../components/RnbChartPanel';
-import FilterDrawer from '../components/FilterDrawer';
-import RnbChartClickPanel from '../components/RnbChartClickPanel';
-import RnbDrilldownModal from '../components/RnbDrilldownModal';
-import RnbChartExpandModal from '../components/RnbChartExpandModal';
 import { hasDrilldownGridData } from '../utils/drilldownGrid';
 import RnbLoader from '../components/RnbLoader';
+import { lazyModal } from '../utils/lazyModal';
 import './RnbHomePage.css';
+
+const FilterDrawer = lazyModal(() => import('../components/FilterDrawer'));
+const RnbDrilldownModal = lazyModal(() => import('../components/RnbDrilldownModal'));
+const RnbChartExpandModal = lazy(() => import('../components/RnbChartExpandModal'));
+const RnbChartClickPanel = lazy(() => import('../components/RnbChartClickPanel'));
 
 export default function RnbHomePage() {
   const location = useLocation();
@@ -252,13 +254,15 @@ export default function RnbHomePage() {
   if (chartClickView?.rows?.length) {
     return (
       <div className="rnb-home-page rnb-home-page--chart-click">
-        <RnbChartClickPanel
-          menuCode={menuCode}
-          title={chartClickView.title}
-          subtitle={chartClickView.subtitle}
-          rows={chartClickView.rows}
-          onBack={() => setChartClickView(null)}
-        />
+        <Suspense fallback={<RnbLoader variant="page" message="Loading grid…" />}>
+          <RnbChartClickPanel
+            menuCode={menuCode}
+            title={chartClickView.title}
+            subtitle={chartClickView.subtitle}
+            rows={chartClickView.rows}
+            onBack={() => setChartClickView(null)}
+          />
+        </Suspense>
       </div>
     );
   }
@@ -337,22 +341,28 @@ export default function RnbHomePage() {
       />
 
       {expandedChart ? (
-        <RnbChartExpandModal
-          chart={
-            charts.find((c) => c.id === expandedChart.id) ?? expandedChart
+        <Suspense
+          fallback={
+            <RnbLoader variant="fullscreen" message="Loading chart…" />
           }
-          appliedFilters={appliedFiltersByWidget[expandedChart.id] ?? []}
-          onClose={() => setExpandedChart(null)}
-          onDrilldownClick={
-            expandedChart.isDrillDown
-              ? () => {
-                  handleDrilldown(expandedChart);
-                  setExpandedChart(null);
-                }
-              : undefined
-          }
-          onChartClick={(v1, v2) => handleChartClick(expandedChart, v1, v2)}
-        />
+        >
+          <RnbChartExpandModal
+            chart={
+              charts.find((c) => c.id === expandedChart.id) ?? expandedChart
+            }
+            appliedFilters={appliedFiltersByWidget[expandedChart.id] ?? []}
+            onClose={() => setExpandedChart(null)}
+            onDrilldownClick={
+              expandedChart.isDrillDown
+                ? () => {
+                    handleDrilldown(expandedChart);
+                    setExpandedChart(null);
+                  }
+                : undefined
+            }
+            onChartClick={(v1, v2) => handleChartClick(expandedChart, v1, v2)}
+          />
+        </Suspense>
       ) : null}
     </div>
   );

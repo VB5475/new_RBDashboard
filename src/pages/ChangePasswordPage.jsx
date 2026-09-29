@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Home, Lock, Check, X as XIcon } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useUser } from '../context/UserContext';
 import AccountConfirmDialog from '../components/AccountConfirmDialog';
 import RnbLoader from '../components/RnbLoader';

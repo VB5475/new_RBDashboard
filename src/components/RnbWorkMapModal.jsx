@@ -9,15 +9,17 @@ import {
 import L from 'leaflet';
 import * as esri from 'esri-leaflet';
 import { X } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import RnbLoader from './RnbLoader';
 import {
   fetchWorkDataForMap,
   parseWorkMapGeometry,
 } from '../services/mapWork';
 import { BHARAT_MAPS_TOKEN, BHARAT_MAPS_URL } from '../config/api.config';
-import 'leaflet/dist/leaflet.css';
 import './RnbWorkMapModal.css';
+
+// Keep Leaflet CSS out of the login/shell entry — load with this chunk only.
+import('leaflet/dist/leaflet.css');
 
 /**
  * Leaflet + Bharat Maps / NIC — SoI-aligned (gov-safe vs OSM).

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { Download, FileText, MapPin, Search, X } from 'lucide-react';
 import { activeTabCodeFromPath } from '../utils/activeTabCode';
 import {

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Bell, Coins, Home, Menu, Moon, Sun } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useUser } from '../context/UserContext';
 import { useTheme } from '../hooks/useTheme';
 import { isOverviewRoutePath, pickDefaultLandingPath } from '../constants/routes';

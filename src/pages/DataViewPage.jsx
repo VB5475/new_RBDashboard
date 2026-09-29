@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import DataGrid from '../components/grid/DataGrid';
 import { columnsFromRows } from '../utils/gridColumns';
 import {

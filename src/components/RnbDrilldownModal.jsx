@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, LayoutGrid, RotateCcw, X } from 'lucide-react';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import DataGrid from './grid/DataGrid';
 import RnbLoader from './RnbLoader';
 import { fetchDrilldownTables } from '../services/drilldown';

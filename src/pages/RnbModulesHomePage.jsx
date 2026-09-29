@@ -1,11 +1,10 @@
 import { useCallback, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { groupAccentColor, navIcon } from '../navigation/buildNav';
 import { resolveGroupAccent } from '../theme/overviewColors';
 import SubmoduleOverviewCard from '../components/SubmoduleOverviewCard';
 import LinkOverviewCard from '../components/LinkOverviewCard';
-import RnbChartClickModal from '../components/RnbChartClickModal';
 import { useUser } from '../context/UserContext';
 import {
   fetchAllModulesOverview,
@@ -15,7 +14,10 @@ import { createFilterSession } from '../services/dashboard';
 import { fetchChartClickRows } from '../services/drilldown';
 import { getUserToken } from '../utils/session';
 import RnbLoader from '../components/RnbLoader';
+import { lazyModal } from '../utils/lazyModal';
 import './RnbModulesHomePage.css';
+
+const RnbChartClickModal = lazyModal(() => import('../components/RnbChartClickModal'));
 
 export default function RnbModulesHomePage() {
   const { user } = useUser();

@@ -2,11 +2,13 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { LayoutGrid, RotateCcw, X } from 'lucide-react';
 import DataGrid from './grid/DataGrid';
 import RnbLoader from './RnbLoader';
-import RnbWorkMapModal from './RnbWorkMapModal';
 import { columnsForChartClick } from '../utils/chartClickMap';
-import { chartClickPanelWidthPx } from './RnbChartClickPanel';
+import { chartClickPanelWidthPx } from '../utils/chartClickPanelWidth';
+import { lazyModal } from '../utils/lazyModal';
 import './RnbDrilldownModal.css';
 import './RnbChartClickPanel.css';
+
+const RnbWorkMapModal = lazyModal(() => import('./RnbWorkMapModal'));
 
 export default function RnbChartClickModal({
   open,
