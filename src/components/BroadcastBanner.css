@@ -64,6 +64,42 @@
   background: var(--bg-card-hover);
 }
 
+.broadcast-banner-link {
+  flex-shrink: 0;
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 10%, var(--surface-mix));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 22%, var(--border-light));
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.broadcast-banner-link:hover {
+  color: var(--accent-primary);
+  background: var(--accent-primary-dim);
+  border-color: color-mix(in srgb, var(--accent-primary) 35%, var(--border-light));
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--accent-primary) 18%, transparent);
+}
+
+.broadcast-banner-link-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media (max-width: 768px) {
   .broadcast-banner,
   .broadcast-banner--embedded {
@@ -73,5 +109,9 @@
 
   .broadcast-banner-text {
     font-size: 11px;
+  }
+
+  .broadcast-banner-link-text {
+    display: none;
   }
 }

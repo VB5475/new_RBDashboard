@@ -1,26 +1,59 @@
 @import './OverviewCardShine.css';
 
+/* Layout shell stays fixed so hover expand never reflows the grid / page. */
+.link-overview-card-slot {
+  position: relative;
+  min-height: 46px;
+  z-index: 0;
+}
+
+.link-overview-card-slot:hover,
+.link-overview-card-slot:focus-within {
+  z-index: 8;
+}
+
 .link-overview-card {
+  --link-pad-y: 8px;
+  --link-pad-x: 11px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 12px 14px 12px 14px;
-  background: linear-gradient(
-    120deg,
-    color-mix(in srgb, var(--link-card-accent, #22c55e) 8%, var(--surface-mix)) 0%,
-    var(--bg-card-2) 55%
-  );
-  min-height: 0;
+  gap: 9px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--link-pad-y) var(--link-pad-x) var(--link-pad-y) calc(var(--link-pad-x) + 3px);
+  min-height: 46px;
   position: relative;
   overflow: hidden;
   border-left: none;
+  isolation: isolate;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--link-card-accent, #22c55e) 9%, var(--surface-mix)) 0%,
+      var(--bg-card-2) 42%,
+      var(--bg-card-2) 100%
+    );
+  box-shadow:
+    inset 0 1px 0 var(--shine-hi),
+    0 1px 1px rgba(15, 23, 42, 0.025);
   transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.28s ease,
-    border-color 0.28s ease,
-    background 0.28s ease;
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    padding 0.3s ease,
+    min-height 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-overview-card--has-remarks {
+  --link-pad-y: 8px;
+  align-items: flex-start;
+  min-height: 52px;
+}
+
+.link-overview-card-slot:has(.link-overview-card--has-remarks) {
+  min-height: 52px;
 }
 
 .link-overview-card--clickable {
@@ -29,69 +62,88 @@
   cursor: pointer;
 }
 
-.link-overview-card--clickable:hover {
-  transform: translateY(-4px);
-  border-color: color-mix(
-    in srgb,
-    var(--link-card-accent, var(--group-accent, #22c55e)) 45%,
-    var(--border-light)
-  );
-  background: linear-gradient(
-    120deg,
-    color-mix(in srgb, var(--link-card-accent, #22c55e) 10%, var(--surface-mix)) 0%,
-    var(--bg-card-hover) 50%
-  );
+.link-overview-card--clickable:hover,
+.link-overview-card--clickable:focus-visible {
+  transform: translateY(-2px);
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--link-card-accent, #22c55e) 14%, var(--surface-mix)) 0%,
+      var(--bg-card-hover) 50%
+    );
   box-shadow:
     inset 0 1px 0 var(--shine-hi),
     0 0 0 1px color-mix(
       in srgb,
-      var(--link-card-accent, #22c55e) 14%,
+      var(--link-card-accent, #22c55e) 18%,
       transparent
     ),
-    0 14px 32px color-mix(
+    0 12px 24px color-mix(
       in srgb,
-      var(--link-card-accent, #22c55e) 24%,
+      var(--link-card-accent, #22c55e) 18%,
       transparent
     ),
-    0 4px 12px rgba(15, 23, 42, 0.06);
+    0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+/* Expand out of flow so siblings / scrollbar stay still. */
+.link-overview-card--has-remarks:hover,
+.link-overview-card--has-remarks:focus-visible {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%;
+  --link-pad-y: 10px;
+  padding-bottom: 12px;
+  min-height: 52px;
+  height: auto;
+  overflow: hidden;
+  transform: translateY(-2px);
 }
 
 .link-overview-card--clickable:active {
-  transform: translateY(-1px);
-  transition-duration: 0.12s;
+  transform: translateY(0);
+  transition-duration: 0.1s;
 }
 
 .link-overview-card--clickable:focus-visible {
   outline: 2px solid var(--link-card-accent, var(--accent-primary));
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 
 .link-overview-card.glass-card {
-  border-radius: var(--radius-md);
+  border-radius: 10px;
 }
 
 .link-overview-card::before {
   content: '';
   position: absolute;
   left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
+  top: 18%;
+  bottom: 18%;
+  width: 2px;
+  border-radius: 0 3px 3px 0;
   background: var(--link-card-accent, var(--group-accent, #22c55e));
   opacity: 0.85;
   z-index: 2;
   transition:
-    width 0.25s ease,
-    opacity 0.25s ease,
-    box-shadow 0.25s ease;
+    top 0.28s ease,
+    bottom 0.28s ease,
+    width 0.28s ease,
+    opacity 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
-.link-overview-card--clickable:hover::before {
-  width: 5px;
+.link-overview-card--clickable:hover::before,
+.link-overview-card--clickable:focus-visible::before {
+  top: 8%;
+  bottom: 8%;
+  width: 3px;
   opacity: 1;
-  box-shadow: 0 0 14px color-mix(
+  box-shadow: 0 0 10px color-mix(
     in srgb,
-    var(--link-card-accent, #22c55e) 55%,
+    var(--link-card-accent, #22c55e) 45%,
     transparent
   );
 }
@@ -101,71 +153,174 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  margin-left: 2px;
-  border-radius: 10px;
+  width: 28px;
+  height: 28px;
+  margin-top: 0;
+  border-radius: 8px;
   color: var(--link-card-accent, var(--group-accent, #22c55e));
   background: color-mix(
     in srgb,
-    var(--link-card-accent, #22c55e) 14%,
+    var(--link-card-accent, #22c55e) 12%,
     var(--surface-mix)
   );
   border: 1px solid color-mix(
     in srgb,
-    var(--link-card-accent, #22c55e) 22%,
+    var(--link-card-accent, #22c55e) 18%,
     transparent
   );
   position: relative;
   z-index: 1;
   transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.25s ease;
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
-.link-overview-card--clickable:hover .link-overview-card-icon-badge {
+.link-overview-card--has-remarks .link-overview-card-icon-badge {
+  margin-top: 1px;
+}
+
+.link-overview-card--clickable:hover .link-overview-card-icon-badge,
+.link-overview-card--clickable:focus-visible .link-overview-card-icon-badge {
   transform: scale(1.05);
-  box-shadow: 0 4px 10px color-mix(
+  background: color-mix(
+    in srgb,
+    var(--link-card-accent, #22c55e) 18%,
+    var(--surface-mix)
+  );
+  box-shadow: 0 3px 8px color-mix(
+    in srgb,
+    var(--link-card-accent, #22c55e) 16%,
+    transparent
+  );
+}
+
+.link-overview-card-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.link-overview-card-title {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.28s ease;
+}
+
+.link-overview-card-remarks {
+  margin: 0;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--text-muted) 92%, var(--link-card-accent, #22c55e));
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 1.35em;
+  transition:
+    color 0.28s ease,
+    max-height 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-overview-card--has-remarks:hover .link-overview-card-remarks,
+.link-overview-card--has-remarks:focus-visible .link-overview-card-remarks {
+  -webkit-line-clamp: 4;
+  max-height: 5.6em;
+  color: color-mix(in srgb, var(--text-secondary) 70%, var(--link-card-accent, #22c55e));
+}
+
+.link-overview-card--clickable:hover .link-overview-card-title,
+.link-overview-card--clickable:focus-visible .link-overview-card-title {
+  color: color-mix(
+    in srgb,
+    var(--link-card-accent, #059669) 62%,
+    var(--text-primary)
+  );
+}
+
+.link-overview-card-external {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  border-radius: 999px;
+  color: var(--link-card-accent, var(--group-accent, #22c55e));
+  background: transparent;
+  border: 1px solid transparent;
+  position: relative;
+  z-index: 1;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.link-overview-card-external-icon {
+  display: block;
+  opacity: 0.7;
+  transition:
+    opacity 0.28s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-overview-card--clickable:hover .link-overview-card-external,
+.link-overview-card--clickable:focus-visible .link-overview-card-external {
+  background: color-mix(
+    in srgb,
+    var(--link-card-accent, #22c55e) 12%,
+    var(--surface-mix)
+  );
+  border-color: color-mix(
     in srgb,
     var(--link-card-accent, #22c55e) 20%,
     transparent
   );
 }
 
-.link-overview-card-title {
-  margin: 0;
-  flex: 1;
-  min-width: 0;
-  padding-left: 2px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  transition: color 0.25s ease;
-}
-
-.link-overview-card--clickable:hover .link-overview-card-title {
-  color: color-mix(in srgb, var(--link-card-accent, #059669) 72%, var(--text-primary));
-}
-
-.link-overview-card-external-icon {
-  flex-shrink: 0;
-  color: var(--link-card-accent, var(--group-accent, #22c55e));
-  opacity: 0.85;
-  position: relative;
-  z-index: 1;
-  transition:
-    opacity 0.25s ease,
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.link-overview-card--clickable:hover .link-overview-card-external-icon {
+.link-overview-card--clickable:hover .link-overview-card-external-icon,
+.link-overview-card--clickable:focus-visible .link-overview-card-external-icon {
   opacity: 1;
-  transform: translate(3px, -3px);
+  transform: translate(1px, -1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link-overview-card--clickable:hover,
+  .link-overview-card--clickable:focus-visible,
+  .link-overview-card--has-remarks:hover,
+  .link-overview-card--has-remarks:focus-visible {
+    transform: none;
+  }
+
+  .link-overview-card--clickable:hover .link-overview-card-icon-badge,
+  .link-overview-card--clickable:focus-visible .link-overview-card-icon-badge,
+  .link-overview-card--clickable:hover .link-overview-card-external-icon,
+  .link-overview-card--clickable:focus-visible .link-overview-card-external-icon {
+    transform: none;
+  }
+
+  .link-overview-card-remarks {
+    transition: color 0.15s ease;
+  }
+
+  .link-overview-card--has-remarks:hover .link-overview-card-remarks,
+  .link-overview-card--has-remarks:focus-visible .link-overview-card-remarks {
+    max-height: none;
+  }
 }

@@ -26,6 +26,7 @@ export default function RnbDrilldownModal({
   const [refTable, setRefTable] = useState([]);
   const [drillDownState, setDrillDownState] = useState({});
   const [loading, setLoading] = useState(false);
+  const [rangeLabel, setRangeLabel] = useState('');
   const gridRef = useRef(null);
 
   useEffect(() => {
@@ -146,6 +147,11 @@ export default function RnbDrilldownModal({
             </div>
           </div>
           <div className="rnb-drilldown-header-actions">
+            {canShowGrid && rangeLabel ? (
+              <span className="rnb-header-range" title={rangeLabel}>
+                {rangeLabel}
+              </span>
+            ) : null}
             <span className="rnb-drilldown-level">Level {currentLevel}</span>
             {canShowGrid ? (
               <button
@@ -200,6 +206,7 @@ export default function RnbDrilldownModal({
                 enableSideBar
                 pageSize={100}
                 onRowClick={handleRowClick}
+                onRangeChange={setRangeLabel}
               />
             </>
           ) : (

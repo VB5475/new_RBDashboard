@@ -46,6 +46,28 @@
   color: var(--text-primary);
 }
 
+.data-modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.data-modal-header-actions .rnb-header-range,
+.data-modal-header-actions .rnb-header-range--panel {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 12%, var(--bg-card-solid));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 28%, var(--border-light));
+}
+
 .data-modal-header h3 {
   margin: 0;
   font-size: 17px;

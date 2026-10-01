@@ -16,6 +16,7 @@ export default function RnbChartClickPanel({
   onBack,
 }) {
   const [mapTarget, setMapTarget] = useState(null);
+  const [rangeLabel, setRangeLabel] = useState('');
   const gridRef = useRef(null);
 
   const columns = useMemo(
@@ -36,6 +37,11 @@ export default function RnbChartClickPanel({
           {subtitle ? <p title={subtitle}>{subtitle}</p> : null}
         </div>
         <div className="rnb-chart-click-header-actions">
+          {rangeLabel ? (
+            <span className="rnb-header-range rnb-header-range--panel" title={rangeLabel}>
+              {rangeLabel}
+            </span>
+          ) : null}
           <button
             type="button"
             className="rnb-chart-click-reset"
@@ -63,6 +69,7 @@ export default function RnbChartClickPanel({
           enableColumnFilters
           enableSideBar
           pageSize={100}
+          onRangeChange={setRangeLabel}
         />
       </div>
 

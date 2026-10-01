@@ -28,6 +28,7 @@ export default function DataViewPage({ sourceName, databasepaging }) {
   const [toDate, setToDate] = useState('');
   const [appliedRange, setAppliedRange] = useState({ from: '', to: '' });
   const [page, setPage] = useState(1);
+  const [rangeLabel, setRangeLabel] = useState('');
   const [useServerPaging, setUseServerPaging] = useState(false);
   const pageSize = 50;
 
@@ -122,40 +123,47 @@ export default function DataViewPage({ sourceName, databasepaging }) {
           </p>
         </div>
 
-        {!zipMode && (
-          <div className="data-view-dates">
-            <label>
-              From
-              <input
-                type="date"
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-              />
-            </label>
-            <label>
-              To
-              <input
-                type="date"
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-              />
-            </label>
-            <button type="button" onClick={handleLoadWithDates}>
-              Load
-            </button>
-            <label className="data-view-toggle">
-              <input
-                type="checkbox"
-                checked={useServerPaging}
-                onChange={(e) => {
-                  setUseServerPaging(e.target.checked);
-                  setPage(1);
-                }}
-              />
-              Server paging (SRCHWITHPAGING)
-            </label>
-          </div>
-        )}
+        <div className="data-view-toolbar-end">
+          {rangeLabel ? (
+            <span className="rnb-header-range rnb-header-range--panel" title={rangeLabel}>
+              {rangeLabel}
+            </span>
+          ) : null}
+          {!zipMode && (
+            <div className="data-view-dates">
+              <label>
+                From
+                <input
+                  type="date"
+                  value={fromDate}
+                  onChange={(e) => setFromDate(e.target.value)}
+                />
+              </label>
+              <label>
+                To
+                <input
+                  type="date"
+                  value={toDate}
+                  onChange={(e) => setToDate(e.target.value)}
+                />
+              </label>
+              <button type="button" onClick={handleLoadWithDates}>
+                Load
+              </button>
+              <label className="data-view-toggle">
+                <input
+                  type="checkbox"
+                  checked={useServerPaging}
+                  onChange={(e) => {
+                    setUseServerPaging(e.target.checked);
+                    setPage(1);
+                  }}
+                />
+                Server paging (SRCHWITHPAGING)
+              </label>
+            </div>
+          )}
+        </div>
       </div>
 
       {isLoading ? (
@@ -172,6 +180,7 @@ export default function DataViewPage({ sourceName, databasepaging }) {
           rows={rows}
           pageSize={pageSize}
           serverPagination={serverPagination}
+          onRangeChange={setRangeLabel}
         />
       ) : (
         <div className="rnb-home-message">Choose a date range and click Load.</div>

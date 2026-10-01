@@ -98,13 +98,16 @@ html[data-theme='dark'] .data-grid-wrapper {
 }
 
 .data-grid-wrapper--modal-chrome {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   min-height: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .data-grid-wrapper--modal-chrome .data-grid-scroll {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   min-height: 0;
   /* Keep a scrollport so sticky header/filter stay inside the grid, not the page */
   overflow: auto;

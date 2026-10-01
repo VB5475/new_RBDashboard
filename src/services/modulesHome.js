@@ -239,6 +239,27 @@ export function isImportantLinksGroup(group) {
   );
 }
 
+/** Pick InfoRemarks from a UserRights row (API casing varies). */
+function pickInfoRemarks(entry) {
+  if (!entry || typeof entry !== 'object') return null;
+  const direct =
+    entry.InfoRemarks ??
+    entry.infoRemarks ??
+    entry.INFOREMARKS ??
+    entry.inforemarks ??
+    entry.InfoRemark ??
+    entry.infoRemark ??
+    entry.Info_Remarks ??
+    entry.info_remarks;
+  if (direct != null && String(direct).trim()) return String(direct).trim();
+
+  for (const [key, value] of Object.entries(entry)) {
+    if (value == null || value === '') continue;
+    if (/^info_?remarks?$/i.test(key)) return String(value).trim();
+  }
+  return null;
+}
+
 function buildLinkModulesFromRightsGroup(userRight, encLoginUserID) {
   return (userRight.children || [])
     .map((child, index) => {
@@ -247,6 +268,7 @@ function buildLinkModulesFromRightsGroup(userRight, encLoginUserID) {
       return {
         kind: 'link',
         title: nav.name || child.menutitle?.trim() || 'Link',
+        infoRemarks: pickInfoRemarks(child),
         menuCode: nav.code || child.code?.trim(),
         href: nav.href,
         to: nav.to,

@@ -20,10 +20,14 @@ export default function RnbChartClickModal({
   onClose,
 }) {
   const [mapTarget, setMapTarget] = useState(null);
+  const [rangeLabel, setRangeLabel] = useState('');
   const gridRef = useRef(null);
 
   useEffect(() => {
-    if (!open) setMapTarget(null);
+    if (!open) {
+      setMapTarget(null);
+      setRangeLabel('');
+    }
   }, [open]);
 
   useEffect(() => {
@@ -53,7 +57,9 @@ export default function RnbChartClickModal({
         aria-label="Close grid"
       />
       <div
-        className="rnb-drilldown-dialog rnb-chart-click-dialog glass-card"
+        className={`rnb-drilldown-dialog rnb-chart-click-dialog glass-card${
+          loading ? ' rnb-chart-click-dialog--loading' : ''
+        }`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="rnb-chart-click-modal-title"
@@ -73,6 +79,11 @@ export default function RnbChartClickModal({
             </div>
           </div>
           <div className="rnb-drilldown-header-actions">
+            {!loading && rangeLabel ? (
+              <span className="rnb-header-range" title={rangeLabel}>
+                {rangeLabel}
+              </span>
+            ) : null}
             {!loading && rows.length > 0 ? (
               <button
                 type="button"
@@ -95,7 +106,9 @@ export default function RnbChartClickModal({
           </div>
         </header>
 
-        <div className="rnb-drilldown-body">
+        <div
+          className={`rnb-drilldown-body${loading ? ' rnb-drilldown-body--loading' : ''}`}
+        >
           {loading ? (
             <RnbLoader variant="inline" message="Loading grid…" />
           ) : rows.length > 0 ? (
@@ -109,6 +122,7 @@ export default function RnbChartClickModal({
               enableColumnFilters
               enableSideBar
               pageSize={100}
+              onRangeChange={setRangeLabel}
             />
           ) : (
             <p className="rnb-drilldown-empty">No data to display.</p>

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Megaphone } from 'lucide-react';
+import { ExternalLink, Megaphone } from 'lucide-react';
 import './BroadcastBanner.css';
+
+const PORTAL_URL = 'https://rnb.gujarat.gov.in/';
 
 export default function BroadcastBanner({ messages = [], embedded = false }) {
   const [index, setIndex] = useState(0);
@@ -52,6 +54,16 @@ export default function BroadcastBanner({ messages = [], embedded = false }) {
           </button>
         </div>
       )}
+      <a
+        className="broadcast-banner-link"
+        href={PORTAL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={PORTAL_URL}
+      >
+        <span className="broadcast-banner-link-text">rnb.gujarat.gov.in</span>
+        <ExternalLink size={13} aria-hidden />
+      </a>
     </div>
   );
 }

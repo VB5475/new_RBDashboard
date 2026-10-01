@@ -13,14 +13,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(1400px, 96vw);
-  height: auto;
+  height: min(92vh, 900px);
   max-height: min(92vh, 900px);
   display: flex;
   flex-direction: column;
   z-index: 121;
   padding: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   border-radius: var(--radius-md, 12px);
 }
 
@@ -29,6 +28,7 @@
 }
 
 .rnb-drilldown-header {
+  flex-shrink: 0;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -79,6 +79,27 @@ html[data-theme='dark'] .rnb-drilldown-header {
   flex-shrink: 0;
 }
 
+.rnb-header-range {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.rnb-header-range--panel {
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 12%, var(--bg-card-solid));
+  border-color: color-mix(in srgb, var(--accent-primary) 28%, var(--border-light));
+}
+
 .rnb-drilldown-level {
   font-size: 0.75rem;
   font-weight: 700;
@@ -115,12 +136,26 @@ html[data-theme='dark'] .rnb-drilldown-header {
 }
 
 .rnb-drilldown-body {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
   background: var(--bg-elevated);
   padding: 16px 20px 20px;
+  overflow: hidden;
+}
+
+.rnb-drilldown-body--loading {
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px;
+}
+
+.rnb-drilldown-body--loading .rnb-loader {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 360px;
 }
 
 .rnb-drilldown-grid-hint {
@@ -132,16 +167,29 @@ html[data-theme='dark'] .rnb-drilldown-header {
 }
 
 .rnb-drilldown-body .data-grid-wrapper {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   min-height: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.rnb-drilldown-body .data-grid-body,
+.rnb-drilldown-body .data-grid-main {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .rnb-drilldown-body .data-grid-scroll {
-  flex: 0 1 auto;
-  max-height: none;
-  overflow: visible;
+  flex: 1 1 auto;
   min-height: 0;
+  max-height: none;
+  overflow: auto;
+}
+
+.rnb-drilldown-body .data-grid-footer {
+  flex-shrink: 0;
 }
 
 .rnb-drilldown-empty {

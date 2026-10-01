@@ -63,30 +63,32 @@ function formatAggValue(value) {
  */
 const DataGrid = forwardRef(function DataGrid(
   {
-  columns = [],
-  rows = [],
-  searchKeys,
-  title,
-  subtitle,
-  emptyMessage = 'No rows to display',
-  pageSize = 50,
-  serverPagination = null,
-  enableColumnFilters = true,
-  /**
-   * Columns / Filters side bar. Defaults on for full-chrome grids and off for
-   * embedded / modal chrome; pass explicitly to override.
-   */
-  enableSideBar = null,
-  plain = false,
-  /** Chart card inline table: no search toolbar, compact chrome */
-  embedded = false,
-  /** Match chart / expand-modal grid (header, stripes, total row) */
-  appearance = embedded ? 'dashboard' : 'default',
-  /** Modal-style grid: no toolbar, fills container */
-  chrome = embedded ? 'embedded' : 'default',
-  onRowClick = null,
-  rowClickHint = '',
-},
+    columns = [],
+    rows = [],
+    searchKeys,
+    title,
+    subtitle,
+    emptyMessage = 'No rows to display',
+    pageSize = 50,
+    serverPagination = null,
+    enableColumnFilters = true,
+    /**
+     * Columns / Filters side bar. Defaults on for full-chrome grids and off for
+     * embedded / modal chrome; pass explicitly to override.
+     */
+    enableSideBar = null,
+    plain = false,
+    /** Chart card inline table: no search toolbar, compact chrome */
+    embedded = false,
+    /** Match chart / expand-modal grid (header, stripes, total row) */
+    appearance = embedded ? 'dashboard' : 'default',
+    /** Modal-style grid: no toolbar, fills container */
+    chrome = embedded ? 'embedded' : 'default',
+    onRowClick = null,
+    rowClickHint = '',
+    /** Called when visible row range changes (for parent headers). */
+    onRangeChange = null,
+  },
   ref,
 ) {
   const [sortField, setSortField] = useState(columns[0]?.key ?? '');
@@ -339,9 +341,8 @@ const DataGrid = forwardRef(function DataGrid(
 
   const SortIcon = ({ field }) => (
     <span
-      className={`data-grid-sort-icon${
-        sortField === field ? ' is-active' : ''
-      }`}
+      className={`data-grid-sort-icon${sortField === field ? ' is-active' : ''
+        }`}
       aria-hidden
     >
       {sortField === field ? (sortDir === 'asc' ? '↑' : '↓') : '↕'}
@@ -375,6 +376,19 @@ const DataGrid = forwardRef(function DataGrid(
   const showFooter = true;
   const colCount = displayColumns.length || 1;
 
+  const rangeLabel = `${displayFrom}–${displayTo} of ${totalRows.toLocaleString()}${
+    grouped ? ' rows (grouped)' : ''
+  }`;
+
+  useEffect(() => {
+    onRangeChange?.(rangeLabel, {
+      from: displayFrom,
+      to: displayTo,
+      total: totalRows,
+      grouped,
+    });
+  }, [onRangeChange, rangeLabel, displayFrom, displayTo, totalRows, grouped]);
+
   return (
     <div className={wrapperClass}>
       {showToolbar && (
@@ -390,7 +404,7 @@ const DataGrid = forwardRef(function DataGrid(
               </span>
             ) : null}
           </div>
-          {!isServer && (
+          {!isServer ? (
             <div className="data-grid-toolbar-actions">
               <label className="data-grid-search">
                 <Search size={16} className="data-grid-search-icon" aria-hidden />
@@ -413,7 +427,7 @@ const DataGrid = forwardRef(function DataGrid(
                 </button>
               ) : null}
             </div>
-          )}
+          ) : null}
         </div>
       )}
 
@@ -598,11 +612,11 @@ const DataGrid = forwardRef(function DataGrid(
                         onKeyDown={
                           clickable
                             ? (e) => {
-                                if (e.key === 'Enter' || e.key === ' ') {
-                                  e.preventDefault();
-                                  onRowClick(row);
-                                }
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                onRowClick(row);
                               }
+                            }
                             : undefined
                         }
                         tabIndex={clickable ? 0 : undefined}
@@ -629,10 +643,7 @@ const DataGrid = forwardRef(function DataGrid(
 
           {showFooter ? (
             <div className="data-grid-footer data-grid-footer-pager">
-              <span className="data-grid-range">
-                {displayFrom}–{displayTo} of {totalRows.toLocaleString()}
-                {grouped ? ' rows (grouped)' : ''}
-              </span>
+              <span className="data-grid-range">{rangeLabel}</span>
               <div className="data-grid-pager">
                 <button
                   type="button"

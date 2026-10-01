@@ -163,7 +163,17 @@
   min-width: 100%;
 }
 
-/* Overview modal uses the same column-based width */
+/* Overview modal: only row area scrolls; dialog header + grid footer stay put */
+.rnb-chart-click-dialog {
+  height: min(88vh, 860px);
+  max-height: min(88vh, 860px);
+}
+
+.rnb-chart-click-dialog--loading {
+  height: min(52vh, 420px);
+  max-height: min(52vh, 420px);
+}
+
 .rnb-chart-click-dialog .rnb-drilldown-heading {
   min-width: 0;
   flex: 1;
@@ -176,16 +186,50 @@
   text-overflow: ellipsis;
 }
 
-.rnb-chart-click-dialog .rnb-drilldown-body,
+.rnb-chart-click-dialog .rnb-drilldown-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
 .rnb-chart-click-dialog .data-grid-wrapper--dashboard,
 .rnb-chart-click-dialog .data-grid-wrapper--modal-chrome {
+  flex: 1 1 auto;
+  min-height: 280px;
   width: 100%;
   max-width: 100%;
+  overflow: hidden;
+}
+
+.rnb-chart-click-dialog .data-grid-wrapper--modal-chrome .data-grid-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow: auto;
+}
+
+.rnb-chart-click-dialog .data-grid-wrapper--modal-chrome .data-grid-footer {
+  flex-shrink: 0;
 }
 
 .rnb-chart-click-dialog .data-grid-table {
   width: 100%;
   min-width: 100%;
+}
+
+.rnb-header-range--panel {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 12%, var(--bg-card-solid));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 28%, var(--border-light));
 }
 
 .rnb-map-cell-btn {

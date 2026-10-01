@@ -108,8 +108,15 @@
   align-items: stretch;
 }
 
+.rnb-modules-group--important-links {
+  padding-bottom: 56px;
+}
+
 .rnb-modules-group--important-links .rnb-modules-group-grid {
+  --modules-gap: 8px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Let expanded cards paint over neighbors without clipping. */
+  overflow: visible;
 }
 
 @media (max-width: 1100px) {

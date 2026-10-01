@@ -25,7 +25,7 @@ export default function RnbModulesHomePage() {
   const [chartClickLoading, setChartClickLoading] = useState(false);
 
   const { data: groups, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ['rnb-modules-home', user?.UserID],
+    queryKey: ['rnb-modules-home', user?.UserID, 'link-info-remarks'],
     queryFn: () => fetchAllModulesOverview(user),
     enabled: Boolean(user?.UserRights?.length),
     staleTime: 5 * 60 * 1000,
